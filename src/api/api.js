@@ -15,8 +15,8 @@ const csrf_token = document.cookie.replace(/(?:(?:^|.*;\s*)csrftoken\s*\=\s*([^;
 export default axios.create({
     baseURL: process.env.REACT_APP_URL,
     timeout: 10000,
-    headers:{
-        "Authorization" : headerToken,
+    headers: {
+        "Authorization": headerToken,
         "Content-Type": 'application/json',
         'X-CSRFToken': csrf_token,
     },

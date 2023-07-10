@@ -53,7 +53,7 @@ export default function MainLayout() {
 
                         <Button
                             // variant={'outlined'}
-                            startIcon={<SearchIcon color={"action"}/>}
+                            startIcon={<SearchIcon color={"white"}/>}
                             style={{
                                 backgroundColor: "#002060",
                                 borderRadius: 10,
@@ -62,7 +62,7 @@ export default function MainLayout() {
                             }}
                         >
                             <Typography variant={"body2"} color={"white"}>
-                                Search
+                                Filter
                             </Typography>
                         </Button>
                     </Grid>

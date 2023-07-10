@@ -6,6 +6,7 @@ export default function SideMenu() {
     return (
         <div style={{
             backgroundColor: "#002060",
+            height: "100%",
         }}>
             <MenuList
                 style={{
