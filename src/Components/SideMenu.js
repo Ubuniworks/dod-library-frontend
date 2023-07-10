@@ -1,5 +1,6 @@
 import React from "react";
-import {MenuList, MenuItem} from "@mui/material";
+import {MenuItem, MenuList} from "@mui/material";
+import {NavLink} from "react-router-dom";
 
 
 export default function SideMenu() {
@@ -13,8 +14,18 @@ export default function SideMenu() {
                     color: "white",
                 }}
             >
-                <MenuItem>My Books</MenuItem>
-                <MenuItem>Library</MenuItem>
+                <NavLink to={"/"} style={{
+                    textDecoration: "none",
+                    color: "white",
+                }}>
+                    <MenuItem>My Books</MenuItem>
+                </NavLink>
+                <NavLink to={"/library"} style={{
+                    textDecoration: "none",
+                    color: "white",
+                }}>
+                    <MenuItem>Library</MenuItem>
+                </NavLink>
                 <MenuItem>Search</MenuItem>
                 <MenuItem>Settings</MenuItem>
             </MenuList>

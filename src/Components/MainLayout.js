@@ -27,7 +27,7 @@ export default function MainLayout() {
                 height: "100%",
                 width: "100%",
                 overflowY: "auto",
-                maxHeight: "100vh"
+                // maxHeight: "100vh"
             }}>
                 <Grid
                     container
@@ -62,7 +62,13 @@ export default function MainLayout() {
                         </Button>
                     </Grid>
                 </Grid>
-                <Outlet/>
+                {/*Main Content*/}
+                <div style={{
+                    marginTop: 10,
+                    padding: 10,
+                }}>
+                    <Outlet/>
+                </div>
             </div>
 
         </div>

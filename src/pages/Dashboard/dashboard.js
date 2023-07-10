@@ -18,7 +18,7 @@ export default function Dashboard() {
         )
     }, [])
     return (
-        <Grid container>
+        <Grid container direction={"row"}>
             <div>
                 <Typography variant={"h5"}>My Books</Typography>
                 <Typography variant={"h4"}
@@ -30,7 +30,9 @@ export default function Dashboard() {
             <Grid container spacing={2}>
                 {books.map((book) => (
                     <Grid item key={book.id} xs={12} sm={6} md={4} lg={3}>
-                        <Card>
+                        <Card style={{
+                            borderRadius: 10,
+                        }}>
                             <CardMedia
                                 component="img"
                                 alt={book.title}
