@@ -1,14 +1,10 @@
 import React from "react";
-import {Avatar, Button, Card, CardContent, Container, Grid, IconButton, Typography} from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
+import {Button, Container, Grid, Typography} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import {Outlet} from "react-router-dom";
-import Tooltip from '@mui/material/Tooltip';
 import SideMenu from "./SideMenu";
 
 export default function MainLayout() {
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
     return (
         <div style={{
             display: "flex",
@@ -52,7 +48,6 @@ export default function MainLayout() {
                     >
 
                         <Button
-                            // variant={'outlined'}
                             startIcon={<SearchIcon color={"white"}/>}
                             style={{
                                 backgroundColor: "#002060",

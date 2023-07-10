@@ -1,13 +1,15 @@
-import {Grid, Typography} from "@mui/material";
-import React, {useEffect} from "react";
+import {Grid, Typography,  Card, CardMedia} from "@mui/material";
+import React from 'react';
+import {useEffect} from "react";
 import Api from "../../api/api";
 
 
 export default function Dashboard() {
+    const [books, setBooks] = React.useState([])
     useEffect(() => {
         Api.get("library/books/").then(
             response => {
-                console.log(response.data["results"])
+                setBooks(response.data["results"])
             }
         ).catch(
             error => {
@@ -25,6 +27,20 @@ export default function Dashboard() {
                             }}
                 >My Collection</Typography>
             </div>
+            <Grid container spacing={2}>
+                {books.map((book) => (
+                    <Grid item key={book.id} xs={12} sm={6} md={4} lg={3}>
+                        <Card>
+                            <CardMedia
+                                component="img"
+                                alt={book.title}
+                                height="200"
+                                image={book.cover_image}
+                            />
+                        </Card>
+                    </Grid>
+                ))}
+            </Grid>
         </Grid>
     )
 }
