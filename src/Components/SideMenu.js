@@ -7,7 +7,7 @@ import API from "../api/api";
 export default function SideMenu() {
 
     function logout() {
-        API.post("logout/user/", {
+        API.post("auth/logout/", {
             "token": localStorage.getItem("auth_token"),
             "email": localStorage.getItem("user_email"),
         })
@@ -24,30 +24,25 @@ export default function SideMenu() {
     }
 
     return (
-        <div style={{
-            backgroundColor: "#002060",
-            height: "100%",
-        }}>
-            <MenuList
-                style={{
-                    color: "white",
-                }}
-            >
-                <NavLink to={"/"} style={{
-                    textDecoration: "none",
-                    color: "white",
-                }}>
-                    <MenuItem>My Books</MenuItem>
-                </NavLink>
-                <NavLink to={"/library"} style={{
-                    textDecoration: "none",
-                    color: "white",
-                }}>
-                    <MenuItem>Library</MenuItem>
-                </NavLink>
-                <MenuItem>Search</MenuItem>
-                <MenuItem>Settings</MenuItem>
-            </MenuList>
+        <div style={{ backgroundColor: '#002060', height: '100%', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ flexGrow: 1 }}>
+                <MenuList style={{ color: 'white' }}>
+                    <NavLink to="/" style={{ textDecoration: 'none', color: 'white' }}>
+                        <MenuItem>My Books</MenuItem>
+                    </NavLink>
+                    <NavLink to="/library" style={{ textDecoration: 'none', color: 'white' }}>
+                        <MenuItem>Library</MenuItem>
+                    </NavLink>
+                    <MenuItem>Search</MenuItem>
+                    <MenuItem>Settings</MenuItem>
+                </MenuList>
+            </div>
+            <div style={{ paddingBottom: '1rem' }}>
+                <MenuItem
+                    style={{ color: 'white' }}
+                    onClick={logout}
+                >Logout</MenuItem>
+            </div>
         </div>
     )
 }
