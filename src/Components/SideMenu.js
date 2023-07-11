@@ -6,6 +6,8 @@ import LogoutIcon from '@mui/icons-material/Logout';
 
 export default function SideMenu() {
 
+    const isAdmin = localStorage.getItem('is_admin');
+
     function logout() {
         API.post("auth/logout/", {
             "token": localStorage.getItem("auth_token"),
@@ -33,8 +35,14 @@ export default function SideMenu() {
                     <NavLink to="/library" style={{textDecoration: 'none', color: 'white'}}>
                         <MenuItem>Library</MenuItem>
                     </NavLink>
-                    <MenuItem>Search</MenuItem>
-                    <MenuItem>Settings</MenuItem>
+                    <NavLink to={"search/"} style={{textDecoration: 'none', color: 'white'}}>
+                        <MenuItem>Search</MenuItem>
+                    </NavLink>
+                    {isAdmin ?
+                        <NavLink to={"settings/"} style={{textDecoration: 'none', color: 'white'}}>
+                            <MenuItem>Settings</MenuItem>
+                        </NavLink>
+                        : null}
                 </MenuList>
             </div>
             <div style={{paddingBottom: '1rem'}}>

@@ -8,6 +8,8 @@ import Library from "./pages/Library/library";
 import ReadMode from "./pages/ReadMode/ReadMode";
 import Login from "./pages/auth/Login";
 import PrivateRoutes from "./utils/PrivateRoutes";
+import Search from "./pages/Search/Search";
+import Settings from "./pages/Settings/Settings";
 
 function App() {
     return (
@@ -19,8 +21,8 @@ function App() {
                         <Route path={"/"} element={<Dashboard/>}/>
                         <Route path={"/library"} element={<Library/>}/>
                         <Route path={"/read"} element={<ReadMode/>}/>
-                        <Route path={"/search"} element={<h1>Search</h1>}/>
-                        <Route path={"/settings"} element={<h1>Settings</h1>}/>
+                        <Route path={"/search"} element={<Search/>}/>
+                        <Route path={"/settings"} element={<Settings/>}/>
                     </Route>
                 </Route>
             </Routes>

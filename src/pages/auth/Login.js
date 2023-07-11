@@ -24,7 +24,6 @@ export default function Login() {
             username: username,
             password: password,
             user_type: 'admin',
-            institution: localStorage.getItem('institution_id'),
         })
             .then((resp_data) => {
                 if (resp_data.status === 200) {
@@ -43,11 +42,6 @@ export default function Login() {
                     );
                     localStorage.setItem('authenticated', true);
 
-                    if (resp_data.data.staff_type) {
-                        localStorage.setItem('staff_type', resp_data.data.staff_type);
-                    } else if (resp_data.data.admin_type) {
-                        localStorage.setItem('admin_type', resp_data.data.admin_type);
-                    }
                     window.location.href = '/';
                 }
             })
