@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Box, Button, Grid, MenuItem, Modal, TextField, Typography} from '@mui/material';
 import API from "../../../api/api";
 
-const AddBookModal = ({open, onClose}) => {
+const AddBookModal = ({open}) => {
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [file, setFile] = useState(null);
@@ -24,7 +24,7 @@ const AddBookModal = ({open, onClose}) => {
     };
 
 
-        // Perform form submission and data processing
+    // Perform form submission and data processing
     function uploadBook(title, author, file, coverImage, info, selectedTopic) {
         // post form data to backend
         let formData = new FormData();
@@ -50,7 +50,6 @@ const AddBookModal = ({open, onClose}) => {
                 setCoverImage(null);
                 setBackgroundInfo('');
                 setSelectedTopic('');
-                // onClose();
             }
         }).catch((error) => {
             console.log(error);
@@ -66,7 +65,7 @@ const AddBookModal = ({open, onClose}) => {
     }, [])
 
     return (
-        <Modal open={open} onClose={onClose}
+        <Modal open={open}
                style={{
                    display: "flex",
                    alignItems: "center",
