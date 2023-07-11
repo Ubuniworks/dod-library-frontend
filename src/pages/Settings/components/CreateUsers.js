@@ -1,17 +1,6 @@
 import React from 'react'
-import {Box, Button, Grid, MenuItem, Modal, TextField, Typography} from "@mui/material";
+import {Box, Button, Grid, Modal, TextField, Typography} from "@mui/material";
 import Api from "../../../api/api";
-
-// Status options
-const statusOptions = [
-    {value: 'active', label: 'Active'},
-    {value: 'disabled', label: 'Disabled'},
-]
-const staffTypes = [
-    {value: 'admin', label: 'Office Admin'},
-    {value: 'nurse', label: 'Nurse'},
-    {value: 'doctor', label: 'Doctor'},
-]
 
 
 export default function CreateUsers({open, setOpen}) {
@@ -19,8 +8,6 @@ export default function CreateUsers({open, setOpen}) {
     const [firstName, setFirstName] = React.useState('');
     const [lastName, setLastName] = React.useState('');
     const [username, setUsername] = React.useState('');
-    const [staffType, setStaffType] = React.useState('');
-    const [status, setStatus] = React.useState('');
     const [password, setPassword] = React.useState('');
     const style = {
         position: 'absolute',

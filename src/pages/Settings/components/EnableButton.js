@@ -3,7 +3,7 @@ import React from "react";
 import API from "../../../api/api";
 
 
-function enableStaff(id: string) {
+function enableStaff(id) {
     // eslint-disable-next-line no-restricted-globals
     if (confirm("Are you sure you want to enable this staff member's access to your institution?")) {
         API.put("/auth/users/enable_user_access/", {

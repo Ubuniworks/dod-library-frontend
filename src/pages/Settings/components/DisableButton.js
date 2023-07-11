@@ -10,7 +10,6 @@ function disableStaff(id) {
             user: id,
         })
             .then((response) => {
-                // console.log(response.data);
                 alert("User access suspended");
                 window.location.reload();
             });

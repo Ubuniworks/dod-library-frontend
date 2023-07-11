@@ -78,7 +78,7 @@ export default function Login() {
                     style={{
                         marginBottom: '2rem',
                         color: '#002060',
-                        }}
+                    }}
                 >
                     The Republic of Kenya
                     Department of Defense

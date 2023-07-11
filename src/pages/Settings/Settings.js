@@ -72,7 +72,6 @@ export default function Settings() {
                             <TableCell>First Name</TableCell>
                             <TableCell>Last Name</TableCell>
                             <TableCell>Status</TableCell>
-                            {/*<TableCell>Actions</TableCell>*/}
                         </TableHead>
                         <TableBody>
                             {users.map((user) => (
@@ -83,7 +82,7 @@ export default function Settings() {
                                 >
                                     <TableCell>{user.first_name}</TableCell>
                                     <TableCell>{user.last_name}</TableCell>
-                                    <TableCell>{user.is_active? "Active" : "Disabled"}</TableCell>
+                                    <TableCell>{user.is_active ? "Active" : "Disabled"}</TableCell>
                                     <TableCell>{user.status}</TableCell>
                                     <TableCell>
                                         <Grid
