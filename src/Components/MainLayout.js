@@ -1,10 +1,26 @@
 import React from "react";
-import {Button, Container, Grid, Typography} from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+import {Avatar, Card, CardContent, Container, Grid, IconButton, Typography,} from "@mui/material";
 import {Outlet} from "react-router-dom";
+import Tooltip from '@mui/material/Tooltip';
 import SideMenu from "./SideMenu";
 
+
+Object.defineProperty(String.prototype, "capitalize", {
+    value: function () {
+        return this.charAt(0).toUpperCase() + this.slice(1);
+    },
+    enumerable: false,
+});
+
 export default function MainLayout() {
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    let first_name = localStorage.getItem("user_first_name").capitalize();
+    let last_name = localStorage.getItem("user_last_name").capitalize();
+    let user_type = localStorage.getItem("user_type");
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
     return (
         <div style={{
             display: "flex",
@@ -31,14 +47,18 @@ export default function MainLayout() {
             }}>
                 <Grid
                     container
-                    justifyContent={"center"}
+                    justifyContent={"space-between"}
                     style={{
                         backgroundColor: "white",
-                        marginTop: 5,
+                        margin: 5,
                         borderRadius: 20,
                         padding: 7,
                     }}
                 >
+                    {/*For other items in the header*/}
+                    <Grid item>
+                        </Grid>
+                    {/*For the Logged in user name display*/}
                     <Grid
                         item
                         style={{
@@ -46,20 +66,39 @@ export default function MainLayout() {
                             alignItems: "center"
                         }}
                     >
+                        <Grid item>
+                            <Card
+                                style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    maxHeight: 30,
+                                    boxShadow: "none",
+                                }}
+                            >
+                                <CardContent>
+                                    <Typography align={"right"}>
+                                        {first_name} {last_name}
+                                    </Typography>
+                                    <Typography variant={"caption"} color={"#77c0a3"}>
+                                        {user_type}
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </Grid>
 
-                        <Button
-                            startIcon={<SearchIcon color={"white"}/>}
-                            style={{
-                                backgroundColor: "#002060",
-                                borderRadius: 10,
-                                alignItems: "center",
-                                marginLeft: 10,
-                            }}
-                        >
-                            <Typography variant={"body2"} color={"white"}>
-                                Filter
-                            </Typography>
-                        </Button>
+                        {/*<Button*/}
+                        {/*    startIcon={<SearchIcon color={"white"}/>}*/}
+                        {/*    style={{*/}
+                        {/*        backgroundColor: "#002060",*/}
+                        {/*        borderRadius: 10,*/}
+                        {/*        alignItems: "center",*/}
+                        {/*        marginLeft: 10,*/}
+                        {/*    }}*/}
+                        {/*>*/}
+                        {/*    <Typography variant={"body2"} color={"white"}>*/}
+                        {/*        Filter*/}
+                        {/*    </Typography>*/}
+                        {/*</Button>*/}
                     </Grid>
                 </Grid>
                 {/*Main Content*/}
