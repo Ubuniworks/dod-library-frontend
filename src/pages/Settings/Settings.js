@@ -60,7 +60,7 @@ export default function Settings() {
                     >
                         Upload Book
                     </Button>
-                    <AddBookModal open={bookOpen} />
+                    <AddBookModal open={bookOpen} setOpen={setBookOpen} />
                 </Grid>
 
                 <Grid container

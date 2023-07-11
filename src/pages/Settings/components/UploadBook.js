@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Box, Button, Grid, MenuItem, Modal, TextField, Typography} from '@mui/material';
 import API from "../../../api/api";
 
-const AddBookModal = ({open}) => {
+const AddBookModal = ({open, setOpen}) => {
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [file, setFile] = useState(null);
@@ -50,6 +50,7 @@ const AddBookModal = ({open}) => {
                 setCoverImage(null);
                 setBackgroundInfo('');
                 setSelectedTopic('');
+                window.location.href = "/library/books"
             }
         }).catch((error) => {
             console.log(error);
@@ -72,6 +73,8 @@ const AddBookModal = ({open}) => {
                    justifyContent: "center",
                }}
         >
+            <>
+
             <Box sx={{
                 width: "80%",
                 height: "80%",
@@ -81,6 +84,16 @@ const AddBookModal = ({open}) => {
                 padding: "25px",
                 overflow: "auto",
             }}>
+                <Button
+                    variant="contained"
+                    style={{
+                        marginBottom: "20px",
+                    }}
+                    onClick={() => {
+                        setOpen(false)
+                    }}>
+                    Close
+                </Button>
                 <form>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
@@ -161,6 +174,7 @@ const AddBookModal = ({open}) => {
                     </Grid>
                 </form>
             </Box>
+            </>
         </Modal>
     );
 };
