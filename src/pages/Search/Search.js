@@ -1,14 +1,28 @@
 import React, {useEffect} from 'react';
 import {Card, CardContent, CardMedia, Grid, Typography} from "@mui/material";
 import Api from "../../api/api";
+import SearchBooks from "./components/AuthorSelect";
 
 export default function Search() {
     const [books, setBooks] = React.useState([])
+    const [authors, setAuthors] = React.useState([])
 
     useEffect(() => {
         Api.get("library/books/").then(
             response => {
                 setBooks(response.data["results"])
+            }
+        ).catch(
+            error => {
+                console.log(error)
+            }
+        )
+    }, [])
+
+    useEffect(() => {
+        Api.get("library/books/get_all_authors").then(
+            response => {
+                setAuthors(response.data)
             }
         ).catch(
             error => {
@@ -57,7 +71,24 @@ export default function Search() {
                 ))}
             </Grid>
 
-            <Grid></Grid>
+            <Grid>
+                <Grid item xs={12} style={{marginBottom: '20px'}}>
+                    <Typography variant="h5">By Author</Typography>
+                </Grid>
+                <Grid
+                    container
+                    spacing={2}
+                    style={{
+                        backgroundColor: '#FFFFFF',
+                        padding: '10px',
+                        borderRadius: '10px',
+                        margin: '0px',
+                        width: '900px',
+                        boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', // Add the box-shadow
+                    }}>
+                    <SearchBooks authors={authors}/>
+                </Grid>
+            </Grid>
         </Grid>
     );
 }
