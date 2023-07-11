@@ -6,7 +6,7 @@ import API from "../../../api/api";
 function enableStaff(id: string) {
     // eslint-disable-next-line no-restricted-globals
     if (confirm("Are you sure you want to enable this staff member's access to your institution?")) {
-        API.put("/staff/enable_staff_access/", {
+        API.put("/auth/users/enable_user_access/", {
             user: id,
         })
             .then((response) => {
@@ -23,7 +23,7 @@ export default function EnableButton({user}) {
             color={"secondary"}
             size={"small"}
             onClick={() => {
-                enableStaff(user.user)
+                enableStaff(user.id)
             }}
         >Enable</Button>
     )

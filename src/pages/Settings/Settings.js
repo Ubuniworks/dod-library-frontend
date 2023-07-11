@@ -72,7 +72,7 @@ export default function Settings() {
                             <TableCell>First Name</TableCell>
                             <TableCell>Last Name</TableCell>
                             <TableCell>Status</TableCell>
-                            <TableCell>Actions</TableCell>
+                            {/*<TableCell>Actions</TableCell>*/}
                         </TableHead>
                         <TableBody>
                             {users.map((user) => (
@@ -89,7 +89,7 @@ export default function Settings() {
                                         <Grid
                                             container
                                             direction={"row"}
-                                            justifyContent={"space-evenly"}>
+                                            justifyContent={"space-around"}>
                                             <Grid item>
                                                 <Button
                                                     variant={"outlined"}
@@ -104,7 +104,7 @@ export default function Settings() {
                                                               user={selectedUser}/>
                                             </Grid>
                                             <Grid item>
-                                                {user.suspended ?
+                                                {user.is_active === false ?
                                                     (<EnableButton user={user}/>) :
                                                     (<DisableButton user={user}/>)
                                                 }
