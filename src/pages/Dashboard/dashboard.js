@@ -32,11 +32,11 @@ export default function Dashboard() {
                       backgroundColor: '#FFFFFF',
                       padding: '10px',
                       borderRadius: '10px',
-                      margin: '0px',
+                      margin: '5px',
                       boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', // Add the box-shadow
                   }}
             >
-                {books.map((book) => (
+                {books.length > 0 ? books.map((book) => (
                     <Grid item key={book.id} xs={12} sm={6} md={4} lg={3}>
                         <Card style={{
                             borderRadius: 10,
@@ -62,7 +62,14 @@ export default function Dashboard() {
                             </a>
                         </CardContent>
                     </Grid>
-                ))}
+                )):
+                    <Grid>
+                    <Typography variant={"h5"}>No books in your collection</Typography>
+                        <Typography variant={"body2"}>Add books to your collection by clicking the Favourite icon on the book
+                            card in Read mode.</Typography>
+                    </Grid>
+                    }
+
             </Grid>
         </Grid>
     )

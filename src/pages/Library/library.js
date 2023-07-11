@@ -64,6 +64,18 @@ export default function Dashboard() {
                         <Card style={{borderRadius: '10px'}}>
                             <CardMedia component="img" alt={book.title} height="200" image={book.cover_image}/>
                         </Card>
+                        <CardContent>
+                            <a
+                                href={book.pdf_file}
+                                download={book.title}
+                                target={"_blank"}
+                                rel={"noreferrer"}
+                                style={{marginRight: '10px'}}>
+                                <Typography variant="subtitle" style={{color: '#002060'}}>
+                                    Download
+                                </Typography>
+                            </a>
+                        </CardContent>
                     </Grid>
                 ))}
             </Grid>
