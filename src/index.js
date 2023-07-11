@@ -6,7 +6,7 @@ import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.REACT_APP_URL}>
         <Routes>
             <Route path={"/*"} element={<App/>}/>
         </Routes>
