@@ -25,7 +25,8 @@ const AddBookModal = ({open, setOpen}) => {
 
 
     // Perform form submission and data processing
-    function uploadBook(title, author, file, coverImage, info, selectedTopic) {
+    function uploadBook(event, title, author, file, coverImage, info, selectedTopic) {
+        event.preventDefault();
         // post form data to backend
         let formData = new FormData();
         formData.append('title', title);
@@ -156,8 +157,9 @@ const AddBookModal = ({open, setOpen}) => {
                             </Grid>
                             <Grid item xs={12}>
                                 <Button type="submit" variant="contained" fullWidth
-                                        onClick={() => {
-                                            uploadBook(title, author, file, coverImage, backgroundInfo, selectedTopic)
+                                        onClick={(event) => {
+                                            event.preventDefault();
+                                            uploadBook(event, title, author, file, coverImage, backgroundInfo, selectedTopic)
                                         }}
                                 >
                                     Submit
