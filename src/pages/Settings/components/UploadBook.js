@@ -41,16 +41,8 @@ const AddBookModal = ({open, setOpen}) => {
             }
         }).then((response) => {
             if (response.status === 201) {
-                alert(response.status)
                 alert("Book added successfully")
-                // Reset form fields
-                setTitle('');
-                setAuthor('');
-                setFile(null);
-                setCoverImage(null);
-                setBackgroundInfo('');
-                setSelectedTopic('');
-                window.location.href = "/library/books"
+                window.location.href = "/library/"
             }
         }).catch((error) => {
             console.log(error);
@@ -75,105 +67,105 @@ const AddBookModal = ({open, setOpen}) => {
         >
             <>
 
-            <Box sx={{
-                width: "80%",
-                height: "80%",
-                backgroundColor: "#FFFFFF",
-                borderRadius: "10px",
-                boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-                padding: "25px",
-                overflow: "auto",
-            }}>
-                <Button
-                    variant="contained"
-                    style={{
-                        marginBottom: "20px",
-                    }}
-                    onClick={() => {
-                        setOpen(false)
-                    }}>
-                    Close
-                </Button>
-                <form>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <TextField
-                                label="Title"
-                                name="title"
-                                value={title}
-                                onChange={handleInputChange}
-                                fullWidth
-                                required
-                            />
+                <Box sx={{
+                    width: "80%",
+                    height: "80%",
+                    backgroundColor: "#FFFFFF",
+                    borderRadius: "10px",
+                    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+                    padding: "25px",
+                    overflow: "auto",
+                }}>
+                    <Button
+                        variant="contained"
+                        style={{
+                            marginBottom: "20px",
+                        }}
+                        onClick={() => {
+                            setOpen(false)
+                        }}>
+                        Close
+                    </Button>
+                    <form>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <TextField
+                                    label="Title"
+                                    name="title"
+                                    value={title}
+                                    onChange={handleInputChange}
+                                    fullWidth
+                                    required
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    label="Author"
+                                    name="author"
+                                    value={author}
+                                    onChange={handleInputChange}
+                                    fullWidth
+                                    required
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    select
+                                    label="Topic"
+                                    name="topic"
+                                    value={selectedTopic}
+                                    onChange={handleTopicChange}
+                                    fullWidth
+                                    required
+                                >
+                                    {topics.map((topic) => (
+                                        <MenuItem key={topic.id} value={topic.id}>
+                                            {topic.name}
+                                        </MenuItem>
+                                    ))}
+                                </TextField>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Typography variant="h5" gutterBottom>
+                                    Upload Book
+                                </Typography>
+                                <input type="file"
+                                       accept=".pdf"
+                                       onChange={(event) =>
+                                           setFile(event.target.files[0])}/>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Typography variant="h5" gutterBottom>
+                                    Book Cover
+                                </Typography>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={(event) => setCoverImage(event.target.files[0])}/>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    label="Background Info"
+                                    name="backgroundInfo"
+                                    value={backgroundInfo}
+                                    onChange={handleInputChange}
+                                    fullWidth
+                                    multiline
+                                    rows={4}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Button type="submit" variant="contained" fullWidth
+                                        onClick={() => {
+                                            uploadBook(title, author, file, coverImage, backgroundInfo, selectedTopic)
+                                        }}
+                                >
+                                    Submit
+                                </Button>
+                            </Grid>
                         </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                label="Author"
-                                name="author"
-                                value={author}
-                                onChange={handleInputChange}
-                                fullWidth
-                                required
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                select
-                                label="Topic"
-                                name="topic"
-                                value={selectedTopic}
-                                onChange={handleTopicChange}
-                                fullWidth
-                                required
-                            >
-                                {topics.map((topic) => (
-                                    <MenuItem key={topic.id} value={topic.id}>
-                                        {topic.name}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Typography variant="h5" gutterBottom>
-                                Upload Book
-                            </Typography>
-                            <input type="file"
-                                   accept=".pdf"
-                                   onChange={(event) =>
-                                       setFile(event.target.files[0])}/>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Typography variant="h5" gutterBottom>
-                                Book Cover
-                            </Typography>
-                            <input
-                                type="file"
-                                accept="image/*"
-                                onChange={(event) => setCoverImage(event.target.files[0])}/>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                label="Background Info"
-                                name="backgroundInfo"
-                                value={backgroundInfo}
-                                onChange={handleInputChange}
-                                fullWidth
-                                multiline
-                                rows={4}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Button type="submit" variant="contained" fullWidth
-                                    onClick={() => {
-                                        uploadBook(title, author, file, coverImage, backgroundInfo, selectedTopic)
-                                    }}
-                            >
-                                Submit
-                            </Button>
-                        </Grid>
-                    </Grid>
-                </form>
-            </Box>
+                    </form>
+                </Box>
             </>
         </Modal>
     );
