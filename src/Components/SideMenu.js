@@ -1,8 +1,8 @@
 import React from "react";
-import {MenuItem, MenuList} from "@mui/material";
+import {Button, MenuItem, MenuList} from "@mui/material";
 import {NavLink} from "react-router-dom";
 import API from "../api/api";
-
+import LogoutIcon from '@mui/icons-material/Logout';
 
 export default function SideMenu() {
 
@@ -24,24 +24,29 @@ export default function SideMenu() {
     }
 
     return (
-        <div style={{ backgroundColor: '#002060', height: '100%', display: 'flex', flexDirection: 'column' }}>
-            <div style={{ flexGrow: 1 }}>
-                <MenuList style={{ color: 'white' }}>
-                    <NavLink to="/" style={{ textDecoration: 'none', color: 'white' }}>
+        <div style={{backgroundColor: '#002060', height: '100%', display: 'flex', flexDirection: 'column'}}>
+            <div style={{flexGrow: 1}}>
+                <MenuList style={{color: 'white'}}>
+                    <NavLink to="/" style={{textDecoration: 'none', color: 'white'}}>
                         <MenuItem>My Books</MenuItem>
                     </NavLink>
-                    <NavLink to="/library" style={{ textDecoration: 'none', color: 'white' }}>
+                    <NavLink to="/library" style={{textDecoration: 'none', color: 'white'}}>
                         <MenuItem>Library</MenuItem>
                     </NavLink>
                     <MenuItem>Search</MenuItem>
                     <MenuItem>Settings</MenuItem>
                 </MenuList>
             </div>
-            <div style={{ paddingBottom: '1rem' }}>
+            <div style={{paddingBottom: '1rem'}}>
                 <MenuItem
-                    style={{ color: 'white' }}
                     onClick={logout}
-                >Logout</MenuItem>
+                ><Button
+                    style={{color: 'white'}}
+                    startIcon={<LogoutIcon/>}
+                >
+                    Logout
+                </Button>
+                </MenuItem>
             </div>
         </div>
     )
