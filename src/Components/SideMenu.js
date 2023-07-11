@@ -15,7 +15,7 @@ export default function SideMenu() {
         })
             .then(() => {
                 localStorage.clear();
-                window.location.reload();
+                window.location.href("/login/")
             })
             .catch((error) => {
                 console.log(error);
