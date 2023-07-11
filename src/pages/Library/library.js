@@ -1,14 +1,15 @@
-import {Card, CardMedia, CardContent, Grid, Typography} from "@mui/material";
+import {Card, CardContent, CardMedia, Grid, Typography} from "@mui/material";
 import React, {useEffect} from 'react';
 import Api from "../../api/api";
+import ReviewModal from "./components/ReviewModal";
 
 
 export default function Dashboard() {
     const [books, setBooks] = React.useState([])
     const [categorizedBooks, setCategorizedBooks] = React.useState({})
+    const [modalStatus, setModalStatus] = React.useState(false)
+    const [modalBook, setModalBook] = React.useState({})
 
-    // get API url from .env file
-    const API_URL = process.env.REACT_APP_API_URL
     useEffect(() => {
         Api.get("library/books/").then(
             response => {
@@ -24,7 +25,6 @@ export default function Dashboard() {
     useEffect(() => {
         Api.get("library/books/get_categorized_books/").then(
             response => {
-                console.log(response.data)
                 setCategorizedBooks(response.data)
             }
         ).catch(
@@ -33,6 +33,13 @@ export default function Dashboard() {
             }
         )
     }, [])
+
+    const handleCardClick = (book) => {
+        setModalBook(book);
+        setModalStatus(true);
+    };
+
+
     return (
         <Grid container direction="row">
             <Grid item xs={12} style={{marginBottom: '20px'}}>
@@ -86,25 +93,37 @@ export default function Dashboard() {
                             <Grid container spacing={2}>
                                 {categorizedBooks[category].map((book) => (
                                     <Grid item key={book.id} xs={12} sm={6} md={4} lg={3}>
-                                        <Card style={{display: "flex", borderRadius: '10px'}}>
+                                        <Card
+                                            style={{ display: 'flex', borderRadius: '10px' }}
+                                            onClick={() => {
+                                                handleCardClick(book);
+                                            }}
+                                        >
                                             <CardMedia
                                                 component="img"
                                                 alt={book.title}
                                                 height="100"
                                                 image={book.cover_image}
                                                 style={{
-                                                    width: "50px",
-                                                    objectFit: "cover"
+                                                    width: '50px',
+                                                    objectFit: 'cover',
                                                 }}
                                             />
-                                            <CardContent style={{flexGrow: 1}}>
+                                            <CardContent style={{ flexGrow: 1 }}>
                                                 <Typography variant="subtitle1">{book.title}</Typography>
                                                 <Typography variant="subtitle2">{book.author}</Typography>
                                             </CardContent>
-
                                         </Card>
+                                        <ReviewModal
+                                            book={modalBook}
+                                            modalStatus={modalStatus}
+                                            setModalStatus={setModalStatus}
+                                        />
                                     </Grid>
                                 ))}
+
+
+
                             </Grid>
                         </Grid>
                     ))}
