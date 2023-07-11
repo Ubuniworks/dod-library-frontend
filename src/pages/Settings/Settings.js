@@ -22,8 +22,10 @@ export default function Settings() {
     const [open, setOpen] = useState(false)
     const [selectedUser, setSelectedUser] = useState({});
 
+    const isAdmin = localStorage.getItem('is_admin') === 'true';
+
     // ensure that logged-in user is admin
-    if (!localStorage.getItem('is_admin')) {
+    if (isAdmin === false) {
         window.location.href = '/'
     }
     useEffect(() => {
@@ -69,7 +71,6 @@ export default function Settings() {
                         <TableHead>
                             <TableCell>First Name</TableCell>
                             <TableCell>Last Name</TableCell>
-                            <TableCell>Staff type</TableCell>
                             <TableCell>Status</TableCell>
                             <TableCell>Actions</TableCell>
                         </TableHead>
@@ -82,7 +83,7 @@ export default function Settings() {
                                 >
                                     <TableCell>{user.first_name}</TableCell>
                                     <TableCell>{user.last_name}</TableCell>
-                                    <TableCell>{user.staff_type}</TableCell>
+                                    <TableCell>{user.is_active? "Active" : "Disabled"}</TableCell>
                                     <TableCell>{user.status}</TableCell>
                                     <TableCell>
                                         <Grid

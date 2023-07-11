@@ -6,7 +6,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 
 export default function SideMenu() {
 
-    const isAdmin = localStorage.getItem('is_admin');
+    const isAdmin = localStorage.getItem('is_admin') === 'true';
 
     function logout() {
         API.post("auth/logout/", {

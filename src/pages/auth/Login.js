@@ -22,8 +22,7 @@ export default function Login() {
     const handleLogin = () => {
         API.post('auth/login/', {
             username: username,
-            password: password,
-            user_type: 'admin',
+            password: password
         })
             .then((resp_data) => {
                 if (resp_data.status === 200) {
