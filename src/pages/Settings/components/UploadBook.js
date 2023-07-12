@@ -39,7 +39,7 @@ const AddBookModal = ({open, setOpen}) => {
         API.post('/library/books/upload_book/', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
-            }, timeout: 40000,
+            }, timeout: 90000,
         }).then((response) => {
             if (response.status === 201) {
                 alert("Book added successfully")
