@@ -31,6 +31,7 @@ export default function Login() {
                     localStorage.setItem('user_email', resp_data.data['user']['email']);
                     localStorage.setItem('user_id', resp_data.data['user']['id']);
                     localStorage.setItem('is_admin', resp_data.data['user']['is_admin']);
+                    localStorage.setItem('username', resp_data.data['user']['username'])
                     localStorage.setItem(
                         'user_first_name',
                         resp_data.data['user']['first_name']
