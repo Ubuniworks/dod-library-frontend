@@ -62,7 +62,7 @@ export default function ReviewModal({modalStatus, setModalStatus, onClose, book}
                             <CardMedia
                                 component="img"
                                 alt={book.title}
-                                image={book.cover_image}
+                                image={book.cover_image_url}
                                 style={{
                                     width: '300px',
                                     height: '350px',

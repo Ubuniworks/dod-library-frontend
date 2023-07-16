@@ -115,7 +115,7 @@ export default function Dashboard() {
                                                 component="img"
                                                 alt={book.title}
                                                 height="100"
-                                                image={book.cover_image}
+                                                image={book.cover_image_url}
                                                 style={{
                                                     width: '50px',
                                                     objectFit: 'cover',

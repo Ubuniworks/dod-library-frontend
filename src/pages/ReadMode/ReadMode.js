@@ -61,7 +61,7 @@ export default function ReadMode() {
                         Favourite
                     </Button>
                     <h1>{bookData.title}</h1>
-                    <PDFViewer pdfFile={bookData.pdf_file}/>
+                    <PDFViewer pdfFile={bookData.pdf_file_url}/>
                 </div>
             ) : (
                 <h1>Loading...</h1>
