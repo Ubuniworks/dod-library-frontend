@@ -9,7 +9,9 @@ const AddBookModal = ({open, setOpen}) => {
     const [coverImage, setCoverImage] = useState(null);
     const [backgroundInfo, setBackgroundInfo] = useState('');
     const [selectedTopic, setSelectedTopic] = useState('');
-    const [topics, setTopics] = useState([]); // Replace with your list of topics
+    const [topics, setTopics] = useState([]);
+    const [classifications, setClassifications] = useState([]);
+    const [selectedClassification, setSelectedClassification] = useState('');
 
     const handleInputChange = (event) => {
         const {name, value} = event.target;
@@ -20,7 +22,6 @@ const AddBookModal = ({open, setOpen}) => {
 
     const handleTopicChange = (event) => {
         setSelectedTopic(event.target.value);
-        console.log(event.target.value)
     };
 
 
@@ -33,6 +34,7 @@ const AddBookModal = ({open, setOpen}) => {
         formData.append('author', author);
         formData.append('background_info', info);
         formData.append('topic', selectedTopic);
+        formData.append('classification', selectedClassification);
         formData.append('pdf_file', file);
         formData.append('cover_image', coverImage);
 
@@ -55,6 +57,13 @@ const AddBookModal = ({open, setOpen}) => {
         API.get("/library/books/get_topics/")
             .then((response) => {
                 setTopics(response.data)
+            })
+    }, [])
+
+    useEffect(() => {
+        API.get("/library/books/get_classifications/")
+            .then((response) => {
+                setClassifications(response.data)
             })
     }, [])
 
@@ -122,6 +131,23 @@ const AddBookModal = ({open, setOpen}) => {
                                     {topics.map((topic) => (
                                         <MenuItem key={topic.id} value={topic.id}>
                                             {topic.name}
+                                        </MenuItem>
+                                    ))}
+                                </TextField>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    select
+                                    label="Classification"
+                                    name="classification"
+                                    value={selectedClassification}
+                                    onChange={(event) => setSelectedClassification(event.target.value)}
+                                    fullWidth
+                                    required
+                                >
+                                    {classifications.map((classification) => (
+                                        <MenuItem key={classification} value={classification}>
+                                            {classification}
                                         </MenuItem>
                                     ))}
                                 </TextField>
