@@ -43,6 +43,11 @@ export default function SideMenu() {
                             <MenuItem>Settings</MenuItem>
                         </NavLink>
                         : null}
+
+                    <NavLink to={"requests/"} style={{textDecoration: 'none', color: 'white'}}>
+                        <MenuItem>Request Book</MenuItem>
+                    </NavLink>
+
                 </MenuList>
             </div>
             <div style={{paddingBottom: '1rem'}}>

@@ -10,6 +10,7 @@ import Login from "./pages/auth/Login";
 import PrivateRoutes from "./utils/PrivateRoutes";
 import Search from "./pages/Search/Search";
 import Settings from "./pages/Settings/Settings";
+import RequestsPage from "./pages/requests/RequestsPage";
 
 function App() {
     return (
@@ -23,6 +24,7 @@ function App() {
                         <Route path={"/read"} element={<ReadMode/>}/>
                         <Route path={"/search"} element={<Search/>}/>
                         <Route path={"/settings"} element={<Settings/>}/>
+                        <Route path={"/requests"} element={<RequestsPage/>}/>
                     </Route>
                 </Route>
             </Routes>
