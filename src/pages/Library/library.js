@@ -65,6 +65,7 @@ export default function Dashboard() {
                             <CardMedia component="img" alt={book.title} height="200" image={book.cover_image}/>
                         </Card>
                         <CardContent>
+                            <Typography variant="subtitle1">{book.title}</Typography>
                             <a
                                 href={book.pdf_file}
                                 download={book.title}
