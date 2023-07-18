@@ -11,6 +11,7 @@ import PrivateRoutes from "./utils/PrivateRoutes";
 import Search from "./pages/Search/Search";
 import Settings from "./pages/Settings/Settings";
 import RequestsPage from "./pages/requests/RequestsPage";
+import LessonsLearnt from "./pages/Lessons/LessonsLearnt";
 
 function App() {
     return (
@@ -25,6 +26,7 @@ function App() {
                         <Route path={"/search"} element={<Search/>}/>
                         <Route path={"/settings"} element={<Settings/>}/>
                         <Route path={"/requests"} element={<RequestsPage/>}/>
+                        <Route path={"/lessons"} element={<LessonsLearnt/>}/>
                     </Route>
                 </Route>
             </Routes>

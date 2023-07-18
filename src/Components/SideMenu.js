@@ -47,6 +47,9 @@ export default function SideMenu() {
                     <NavLink to={"requests/"} style={{textDecoration: 'none', color: 'white'}}>
                         <MenuItem>Request Book</MenuItem>
                     </NavLink>
+                    <NavLink to={"lessons/"} style={{textDecoration: 'none', color: 'white'}}>
+                        <MenuItem>Lessons Learnt</MenuItem>
+                    </NavLink>
 
                 </MenuList>
             </div>
