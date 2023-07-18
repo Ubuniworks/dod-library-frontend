@@ -69,45 +69,48 @@ export default function LessonsLearnt() {
                       width: '96%',
                   }}
             >
-                {isAdmin ?
-                    <>
-                        <Typography variant={"h4"}>Uploaded Lessons</Typography>
-                        <TableContainer component={Paper}>
+                <>
+                    <Typography variant={"h4"}>Uploaded Lessons</Typography>
+                    <TableContainer component={Paper}>
 
-                            <Table>
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>Tile</TableCell>
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Tile</TableCell>
+                                    {isAdmin ?
                                         <TableCell>Uploaded by</TableCell>
-                                        <TableCell>Action</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {lessons.length > 0 ? lessons.map((lesson) => (
-                                        <TableRow key={lesson.id}>
-                                            <TableCell>{lesson.title}</TableCell>
+                                        : null}
+                                    <TableCell>Action</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {lessons.length > 0 ? lessons.map((lesson) => (
+                                    <TableRow key={lesson.id}>
+                                        <TableCell>{lesson.title}</TableCell>
+                                        {isAdmin ?
                                             <TableCell>{lesson.user}</TableCell>
-                                            <TableCell>
-                                                <Button
-                                                    variant={"contained"}
-                                                    color={"primary"}
-                                                    onClick={() => {
-                                                        setSelectedLesson(lesson)
-                                                        setViewLesson(true)
-                                                    }}
-                                                >
-                                                    View
-                                                </Button>
-                                            </TableCell>
-                                        </TableRow>
-                                    )): null}
-                                </TableBody>
-                            </Table>
-                            <ViewLesson open={viewLesson} setOpen={setViewLesson} lesson={selectedLesson}/>
+                                            : null}
+                                        <TableCell>
+                                            <Button
+                                                variant={"contained"}
+                                                color={"primary"}
+                                                onClick={() => {
+                                                    setSelectedLesson(lesson)
+                                                    setViewLesson(true)
+                                                }}
+                                            >
+                                                View
+                                            </Button>
+                                        </TableCell>
+                                    </TableRow>
+                                )) : null}
+                            </TableBody>
+                        </Table>
+                        <ViewLesson open={viewLesson} setOpen={setViewLesson} lesson={selectedLesson}/>
 
-                        </TableContainer>
-                    </>
-                    : null}
+                    </TableContainer>
+                </>
             </Grid>
         </Grid>
-    )}
+    )
+}

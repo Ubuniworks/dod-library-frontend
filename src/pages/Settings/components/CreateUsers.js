@@ -9,6 +9,7 @@ export default function CreateUsers({open, setOpen}) {
     const [lastName, setLastName] = React.useState('');
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const [isAdmin, setIsAdmin] = React.useState(false);
     const style = {
         position: 'absolute',
         top: '50%',
@@ -29,7 +30,8 @@ export default function CreateUsers({open, setOpen}) {
             "last_name": lastName,
             "email": email,
             "username": username,
-            "password": password
+            "password": password,
+            "is_admin": isAdmin,
         }).then((response) => {
             if (response.status === 200 || response.status === 201) {
                 alert("User created successfully")
@@ -111,6 +113,18 @@ export default function CreateUsers({open, setOpen}) {
                                        onChange={(e) => {
                                            setPassword(e.target.value)
                                        }}
+                            />
+                        </Grid>
+                    </Grid>
+                    <Grid container direction={"row"} spacing={2}>
+                {/*        Check box for whether one is an admin or not*/}
+                        <Grid item xs={12}>
+                            <Typography variant={"h6"}>Is Admin</Typography>
+                            <TextField type={"checkbox"}
+                                       value={isAdmin}
+                                        onChange={(e) => {
+                                            setIsAdmin(e.target.value)
+                                        }}
                             />
                         </Grid>
                     </Grid>
