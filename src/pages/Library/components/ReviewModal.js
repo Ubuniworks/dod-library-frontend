@@ -87,6 +87,7 @@ export default function ReviewModal({modalStatus, setModalStatus, onClose, book}
                         }}
                     >
                         {/* Download link */}
+                        {book.classification !== "Top Secret" ?
                         <a
                             href={book.pdf_file}
                             download={book.title}
@@ -96,7 +97,7 @@ export default function ReviewModal({modalStatus, setModalStatus, onClose, book}
                             <Typography variant="body2" style={{color: '#002060'}}>
                                 Download
                             </Typography>
-                        </a>
+                        </a> : null}
 
                         <Button
                             variant="contained"

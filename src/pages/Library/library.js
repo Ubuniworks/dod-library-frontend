@@ -66,6 +66,7 @@ export default function Dashboard() {
                         </Card>
                         <CardContent>
                             <Typography variant="subtitle1">{book.title}</Typography>
+                                {book.classification !== "Top Secret" ?
                             <a
                                 href={book.pdf_file}
                                 download={book.title}
@@ -76,6 +77,7 @@ export default function Dashboard() {
                                     Download
                                 </Typography>
                             </a>
+                                : null}
                         </CardContent>
                     </Grid>
                 ))}
