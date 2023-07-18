@@ -1,5 +1,6 @@
 import React from 'react';
-import {Box, Button, Modal} from "@mui/material";
+import {Box, Button, Grid, Modal, TextField} from "@mui/material";
+import PDFViewer from "./PDFViewer";
 
 
 export default function ViewLesson({open, setOpen, lesson}) {
@@ -31,6 +32,15 @@ export default function ViewLesson({open, setOpen, lesson}) {
                     Close
                 </Button>
                 <h1>{lesson.title}</h1>
+                <Grid container>
+                    <Grid item xs={12}>
+                        <p>{lesson.content}</p>
+                    </Grid>
+                    <Grid item xs={12}>
+                    {/*    Display PDF content here*/}
+                        <PDFViewer url={lesson.attachment}/>
+                    </Grid>
+                </Grid>
             </Box>
         </Modal>
     );
