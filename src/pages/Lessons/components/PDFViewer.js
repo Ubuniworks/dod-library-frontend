@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
-import { Grid } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Grid, Button, Typography } from '@mui/material';
 import { Document, Page, pdfjs } from 'react-pdf';
+import { ReactReader } from 'react-reader';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-
-function PDFViewer({ url }) {
+function FileViewer({ url }) {
     const [numPages, setNumPages] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
+
+    useEffect(() => {
+        setCurrentPage(1); // Reset the current page when the URL prop changes
+    }, [url]);
 
     const goToPrevPage = () => {
         setCurrentPage((prevPage) => prevPage - 1);
@@ -21,36 +25,82 @@ function PDFViewer({ url }) {
         setNumPages(numPages);
     }
 
-    return (
-        <Grid item xs={12}
-                style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                }}
-        >
-            <Document
-                file={url}
-                onLoadSuccess={onDocumentLoadSuccess}
-            >
-                {/*{Array.from(new Array(numPages), (el, index) => (*/}
-                    <Page
-                        pageNumber={currentPage}
+    if (url && url !== '') {
+        const fileType = getFileType(url);
+
+        if (fileType === 'application/pdf') {
+            return (
+                <Grid item xs={12}>
+                    <Document file={url} onLoadSuccess={onDocumentLoadSuccess}>
+                        <Page pageNumber={currentPage} />
+                    </Document>
+                    <Typography>
+                        Page {currentPage} of {numPages}
+                    </Typography>
+                    <Button disabled={currentPage <= 1} onClick={goToPrevPage}>
+                        Previous
+                    </Button>
+                    <Button disabled={currentPage >= numPages} onClick={goToNextPage}>
+                        Next
+                    </Button>
+                </Grid>
+            );
+        } else if (fileType === 'application/epub+zip') {
+            return (
+                <Grid item xs={12}>
+                    <ReactReader
+                        url={url}
+                        location={currentPage}
+                        locationChanged={setCurrentPage}
                     />
-                {/*))}*/}
-            </Document>
-            <p>
-                Page {currentPage} of {numPages}
-            </p>
-            <button disabled={currentPage <= 1} onClick={goToPrevPage}>
-                Previous
-            </button>
-            <button disabled={currentPage >= numPages} onClick={goToNextPage}>
-                Next
-            </button>
-        </Grid>
-    );
+                    <Typography>
+                        Page {currentPage} of {numPages}
+                    </Typography>
+                    <Button disabled={currentPage <= 1} onClick={goToPrevPage}>
+                        Previous
+                    </Button>
+                    <Button disabled={currentPage >= numPages} onClick={goToNextPage}>
+                        Next
+                    </Button>
+                </Grid>
+            );
+        } else if (fileType.startsWith('image/')) {
+            return (
+                <Grid item xs={12}>
+                    <img src={url} alt={"Image"} />
+                </Grid>
+            );
+        } else {
+            return (
+                <Grid item xs={12}>
+                    <Typography>Unsupported file format</Typography>
+                </Grid>
+            );
+        }
+    } else {
+        return (
+            <Grid item xs={12}>
+                <Typography>No file selected</Typography>
+            </Grid>
+        );
+    }
 }
 
-export default PDFViewer;
+function getFileType(url) {
+    const parsedUrl = new URL(url);
+    const fileUrl = parsedUrl.origin + parsedUrl.pathname;
+    const extension = fileUrl.split('.').pop().toLowerCase();
+    const fileTypeMap = {
+        pdf: 'application/pdf',
+        epub: 'application/epub+zip',
+        jpg: 'image/jpeg',
+        jpeg: 'image/jpeg',
+        png: 'image/png',
+        // Add more file extensions and their corresponding MIME types as needed
+    };
+
+
+    return fileTypeMap[extension] || '';
+}
+
+export default FileViewer;
