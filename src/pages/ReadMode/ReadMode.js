@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {pdfjs} from 'react-pdf';
-import PDFViewer from "./components/PDFViewer";
+import PDFViewer from "./components/FileViewer";
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import Api from "../../api/api";
 import {Button} from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import FileViewer from "./components/FileViewer";
 
 
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
@@ -61,7 +62,7 @@ export default function ReadMode() {
                         Favourite
                     </Button>
                     <h1>{bookData.title}</h1>
-                    <PDFViewer pdfFile={bookData.pdf_file_url}/>
+                    <FileViewer url={bookData.pdf_file_url}/>
                 </div>
             ) : (
                 <h1>Loading...</h1>

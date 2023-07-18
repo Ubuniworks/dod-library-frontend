@@ -12,6 +12,7 @@ import Search from "./pages/Search/Search";
 import Settings from "./pages/Settings/Settings";
 import RequestsPage from "./pages/requests/RequestsPage";
 import LessonsLearnt from "./pages/Lessons/LessonsLearnt";
+import Notices from "./pages/Notices/Notices";
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                 <Route element={<PrivateRoutes/>}>
                     <Route element={<MainLayout/>}>
                         <Route path={"/"} element={<Dashboard/>}/>
+                        <Route path={"/notices"} element={<Notices/>}/>
                         <Route path={"/library"} element={<Library/>}/>
                         <Route path={"/read"} element={<ReadMode/>}/>
                         <Route path={"/search"} element={<Search/>}/>

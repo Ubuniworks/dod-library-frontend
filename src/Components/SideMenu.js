@@ -32,6 +32,9 @@ export default function SideMenu() {
                     <NavLink to="/" style={{textDecoration: 'none', color: 'white'}}>
                         <MenuItem>My Books</MenuItem>
                     </NavLink>
+                    <NavLink to="/notices" style={{textDecoration: 'none', color: 'white'}}>
+                        <MenuItem>Notices</MenuItem>
+                    </NavLink>
                     <NavLink to="/library" style={{textDecoration: 'none', color: 'white'}}>
                         <MenuItem>Library</MenuItem>
                     </NavLink>
