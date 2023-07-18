@@ -13,11 +13,14 @@ import {
 } from "@mui/material";
 import Api from "../../api/api";
 import UploadLesson from "./components/UploadLesson";
+import ViewLesson from "./components/ViewLesson";
 
 export default function LessonsLearnt() {
     const [modalStatus, setModalStatus] = React.useState(false)
     const isAdmin = localStorage.getItem('is_admin') === 'true';
     const [lessons, setLessons] = React.useState([])
+    const [viewLesson, setViewLesson] = React.useState(false)
+    const [selectedLesson, setSelectedLesson] = React.useState({})
 
     useEffect(() => {
         Api.get("library/lessons/").then(
@@ -84,10 +87,23 @@ export default function LessonsLearnt() {
                                         <TableRow key={lesson.id}>
                                             <TableCell>{lesson.title}</TableCell>
                                             <TableCell>{lesson.user}</TableCell>
+                                            <TableCell>
+                                                <Button
+                                                    variant={"contained"}
+                                                    color={"primary"}
+                                                    onClick={() => {
+                                                        setSelectedLesson(lesson)
+                                                        setViewLesson(true)
+                                                    }}
+                                                >
+                                                    View
+                                                </Button>
+                                            </TableCell>
                                         </TableRow>
                                     )): null}
                                 </TableBody>
                             </Table>
+                            <ViewLesson open={viewLesson} setOpen={setViewLesson} lesson={selectedLesson}/>
 
                         </TableContainer>
                     </>
