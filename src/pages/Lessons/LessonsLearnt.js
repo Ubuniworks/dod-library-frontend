@@ -17,12 +17,12 @@ import UploadLesson from "./components/UploadLesson";
 export default function LessonsLearnt() {
     const [modalStatus, setModalStatus] = React.useState(false)
     const isAdmin = localStorage.getItem('is_admin') === 'true';
-    const [books, setBooks] = React.useState([])
+    const [lessons, setLessons] = React.useState([])
 
     useEffect(() => {
-        Api.get("library/requested-books/").then(
+        Api.get("library/lessons/").then(
             response => {
-                setBooks(response.data["results"])
+                setLessons(response.data["results"])
             }
         ).catch(
             error => {
@@ -68,22 +68,22 @@ export default function LessonsLearnt() {
             >
                 {isAdmin ?
                     <>
-                        <Typography variant={"h4"}>Lessons Learnt</Typography>
+                        <Typography variant={"h4"}>Uploaded Lessons</Typography>
                         <TableContainer component={Paper}>
 
                             <Table>
                                 <TableHead>
                                     <TableRow>
                                         <TableCell>Tile</TableCell>
-                                        <TableCell>Requested by</TableCell>
+                                        <TableCell>Uploaded by</TableCell>
                                         <TableCell>Action</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {books.length > 0 ? books.map((book) => (
-                                        <TableRow key={book.id}>
-                                            <TableCell>{book.name}</TableCell>
-                                            <TableCell>{book.user}</TableCell>
+                                    {lessons.length > 0 ? lessons.map((lesson) => (
+                                        <TableRow key={lesson.id}>
+                                            <TableCell>{lesson.title}</TableCell>
+                                            <TableCell>{lesson.user}</TableCell>
                                         </TableRow>
                                     )): null}
                                 </TableBody>
