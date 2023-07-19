@@ -185,7 +185,7 @@ const AddBookModal = ({open, setOpen}) => {
                                 <Button type="submit" variant="contained" fullWidth
                                         onClick={(event) => {
                                             event.preventDefault();
-                                            uploadBook(event, title, author, file, coverImage, backgroundInfo, selectedTopic)
+                                            uploadBook(event, title, author, file, coverImage, backgroundInfo, selectedCategory)
                                         }}
                                 >
                                     Submit
