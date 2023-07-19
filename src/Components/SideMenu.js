@@ -38,8 +38,15 @@ export default function SideMenu() {
                     <NavLink to="/library" style={{textDecoration: 'none', color: 'white'}}>
                         <MenuItem>Library</MenuItem>
                     </NavLink>
+                    <NavLink to={"lessons/"} style={{textDecoration: 'none', color: 'white'}}>
+                        <MenuItem>Lessons Learnt</MenuItem>
+                    </NavLink>
                     <NavLink to={"search/"} style={{textDecoration: 'none', color: 'white'}}>
                         <MenuItem>Search</MenuItem>
+                    </NavLink>
+
+                    <NavLink to={"requests/"} style={{textDecoration: 'none', color: 'white'}}>
+                        <MenuItem>Request Book</MenuItem>
                     </NavLink>
                     {isAdmin ?
                         <NavLink to={"settings/"} style={{textDecoration: 'none', color: 'white'}}>
@@ -47,12 +54,6 @@ export default function SideMenu() {
                         </NavLink>
                         : null}
 
-                    <NavLink to={"requests/"} style={{textDecoration: 'none', color: 'white'}}>
-                        <MenuItem>Request Book</MenuItem>
-                    </NavLink>
-                    <NavLink to={"lessons/"} style={{textDecoration: 'none', color: 'white'}}>
-                        <MenuItem>Lessons Learnt</MenuItem>
-                    </NavLink>
 
                 </MenuList>
             </div>
