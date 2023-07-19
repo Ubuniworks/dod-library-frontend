@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import Api from "../../api/api";
+import {Grid} from "@mui/material";
 
 export default function Notices() {
     const [notices, setNotices] = React.useState([])
@@ -15,8 +16,8 @@ export default function Notices() {
         )
     }, [])
     return (
-        <div>
-        <h1>Notices</h1>
-        </div>
+        <Grid container>
+            <h1>Notices</h1>
+        </Grid>
     );
 }

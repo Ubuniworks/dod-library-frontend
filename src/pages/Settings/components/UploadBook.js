@@ -8,7 +8,7 @@ const AddBookModal = ({open, setOpen}) => {
     const [file, setFile] = useState(null);
     const [coverImage, setCoverImage] = useState(null);
     const [backgroundInfo, setBackgroundInfo] = useState('');
-    const [selectedTopic, setSelectedTopic] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState('');
     const [topics, setTopics] = useState([]);
     const [classifications, setClassifications] = useState([]);
     const [selectedClassification, setSelectedClassification] = useState('');
@@ -21,7 +21,7 @@ const AddBookModal = ({open, setOpen}) => {
     };
 
     const handleTopicChange = (event) => {
-        setSelectedTopic(event.target.value);
+        setSelectedCategory(event.target.value);
     };
 
 
@@ -121,9 +121,9 @@ const AddBookModal = ({open, setOpen}) => {
                             <Grid item xs={12}>
                                 <TextField
                                     select
-                                    label="Topic"
-                                    name="topic"
-                                    value={selectedTopic}
+                                    label="Category"
+                                    name="category"
+                                    value={selectedCategory}
                                     onChange={handleTopicChange}
                                     fullWidth
                                     required
