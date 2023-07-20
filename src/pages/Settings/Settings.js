@@ -84,15 +84,6 @@ export default function Settings() {
                             marginBottom: '10px',
                         }}>
                         <Typography variant={"h4"}>User list</Typography>
-                        <Button variant={"contained"} color={"primary"}
-                                onClick={() => {
-                                    setOpen(true)
-                                }}
-                        >
-                            Create new user
-                        </Button>
-
-                        <CreateUsers open={open} setOpen={setOpen}/>
 
                     </Grid>
                     <TableContainer>
@@ -100,7 +91,6 @@ export default function Settings() {
                             <TableHead>
                                 <TableCell>First Name</TableCell>
                                 <TableCell>Last Name</TableCell>
-                                <TableCell>Status</TableCell>
                             </TableHead>
                             <TableBody>
                                 {users.map((user) => (
@@ -111,34 +101,6 @@ export default function Settings() {
                                     >
                                         <TableCell>{user.first_name}</TableCell>
                                         <TableCell>{user.last_name}</TableCell>
-                                        <TableCell>{user.is_active ? "Active" : "Disabled"}</TableCell>
-                                        <TableCell>{user.status}</TableCell>
-                                        <TableCell>
-                                            <Grid
-                                                container
-                                                direction={"row"}
-                                                justifyContent={"space-around"}>
-                                                <Grid item>
-                                                    <Button
-                                                        variant={"outlined"}
-                                                        color={"primary"}
-                                                        size={"small"}
-                                                        onClick={() => {
-                                                            setSelectedUser(user)
-                                                            setOpenEdit(true)
-                                                        }}
-                                                    >Edit</Button>
-                                                    <ViewEditUser open={openEdit} setOpen={setOpenEdit}
-                                                                  user={selectedUser}/>
-                                                </Grid>
-                                                <Grid item>
-                                                    {user.is_active === false ?
-                                                        (<EnableButton user={user}/>) :
-                                                        (<DisableButton user={user}/>)
-                                                    }
-                                                </Grid>
-                                            </Grid>
-                                        </TableCell>
                                     </TableRow>
 
                                 ))}
