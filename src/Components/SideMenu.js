@@ -16,6 +16,7 @@ import CategoryIcon from '@mui/icons-material/Category';
 import API from "../api/api";
 import {NavLink} from "react-router-dom";
 import LogoutIcon from '@mui/icons-material/Logout';
+import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
 
 export default function SideMenu() {
     const [open, setOpen] = React.useState(true);
@@ -77,6 +78,20 @@ export default function SideMenu() {
                             }}/>
                     </ListItemIcon>
                     <ListItemText primary="Library"
+                                  style={{
+                                      color: 'white'
+                                  }}/>
+                </ListItemButton>
+            </NavLink>
+            <NavLink to={"lessons/"} style={{textDecoration: 'none', color: 'white'}}>
+                <ListItemButton>
+                    <ListItemIcon>
+                        <HistoryEduIcon
+                            style={{
+                                color: 'white'
+                            }}/>
+                    </ListItemIcon>
+                    <ListItemText primary="Lessons Learnt"
                                   style={{
                                       color: 'white'
                                   }}/>
