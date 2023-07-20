@@ -13,6 +13,8 @@ import Settings from "./pages/Settings/Settings";
 import RequestsPage from "./pages/requests/RequestsPage";
 import LessonsLearnt from "./pages/Lessons/LessonsLearnt";
 import Notices from "./pages/Notices/Notices";
+import Uploads from "./pages/Settings/Uploads";
+import Categories from "./pages/Settings/Categories";
 
 function App() {
     return (
@@ -29,6 +31,8 @@ function App() {
                         <Route path={"/settings"} element={<Settings/>}/>
                         <Route path={"/requests"} element={<RequestsPage/>}/>
                         <Route path={"/lessons"} element={<LessonsLearnt/>}/>
+                        <Route path={"/uploads"} element={<Uploads/>}/>
+                        <Route path={"/categories"} element={<Categories/>}/>
                     </Route>
                 </Route>
             </Routes>
