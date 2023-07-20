@@ -1,9 +1,10 @@
-import {Card, CardContent, CardMedia, Chip, Grid, Typography} from "@mui/material";
+import {Button, Card, CardContent, CardMedia, Chip, Grid, Typography} from "@mui/material";
 import React, {useEffect} from 'react';
 import Api from "../../api/api";
 import API from "../../api/api";
 import ReviewModal from "./components/ReviewModal";
 import ClassIcon from "@mui/icons-material/Class";
+import RequestBookModal from "./components/RequestBookModal";
 
 
 export default function Dashboard() {
@@ -143,6 +144,28 @@ export default function Dashboard() {
                             </div>
                         )}
                     </Grid>
+                    <Grid item
+                          direction="column"
+                          style={{
+                              backgroundColor: 'white',
+                              borderRadius: '10px',
+                              paddingTop: '10px',
+                              marginLeft: '10px',
+                              width: '96%',
+                              marginBottom: '10px',
+                          }}
+                    >
+                        <Button
+                            variant={"contained"}
+                            color={"primary"}
+                            onClick={() => {
+                                setModalStatus(true)
+                            }}
+                        >
+                            Request for Book
+                        </Button>
+                    </Grid>
+                    <RequestBookModal modalStatus={modalStatus} setModalStatus={setModalStatus}/>
                 </Grid>
             </Grid>
 

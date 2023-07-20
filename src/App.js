@@ -10,7 +10,7 @@ import Login from "./pages/auth/Login";
 import PrivateRoutes from "./utils/PrivateRoutes";
 import Search from "./pages/Search/Search";
 import Settings from "./pages/Settings/Settings";
-import RequestsPage from "./pages/requests/RequestsPage";
+import RequestsPage from "./pages/Library/RequestsPage";
 import LessonsLearnt from "./pages/Lessons/LessonsLearnt";
 import Notices from "./pages/Notices/Notices";
 import Uploads from "./pages/Settings/Uploads";
