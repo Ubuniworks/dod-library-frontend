@@ -54,10 +54,11 @@ export default function Categories() {
     }
     return (
         <Grid container spacing={2} justifyContent="center" style={{marginTop: "20px"}}>
-            <Grid item container xs={6} direction="column" alignItems="center" spacing={1}>
+            <Grid item container xs={6} direction="column" alignItems="left" spacing={2}
+            >
                 {categories.length > 0 ? (
                     categories.map((category) => (
-                        <Grid key={category.id} item>
+                        <Grid key={category.id} item style={{marginLeft:"10px"}}>
                             <Chip
                                 variant="outlined"
                                 color="info"

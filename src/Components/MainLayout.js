@@ -25,10 +25,9 @@ export default function MainLayout() {
         <div style={{
             display: "flex",
             // position: "absolute",
-            // width: "100%",
             margin: 0,
             padding: 0,
-            height: "100vh",
+            height: "98vh",
         }}>
             <Container style={{
                 maxWidth: "250px",
@@ -39,12 +38,10 @@ export default function MainLayout() {
                 <SideMenu/>
             </Container>
             <div style={{
-                backgroundColor: "#E5E5E5",
-                // height: "100%",
+                backgroundColor: "#FFFFFF",
                 width: "100%",
                 overflowY: "auto",
                 overflowX: "hidden",
-                // maxHeight: "100vh"
             }}>
                 <Grid
                     container

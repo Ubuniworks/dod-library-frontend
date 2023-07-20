@@ -24,6 +24,12 @@ export default function ReadMode() {
 
     }, []);
 
+
+    const getCurrentUsername = () => {
+        // Implement your logic to get the current username
+        // You can use the authenticated user data stored in your application's state or context
+        return localStorage.getItem('username');
+    };
     function markFavorite() {
 
         // Set the bookData state

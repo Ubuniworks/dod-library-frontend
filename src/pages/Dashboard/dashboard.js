@@ -158,7 +158,7 @@ export default function Dashboard() {
                 </Grid>
             )}
             <Typography variant={"h5"}>
-                Notices
+                Notice Board
             </Typography>
             <Grid item>
                 {notices.length > 0 ? notices.map((notice) => (

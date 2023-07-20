@@ -79,9 +79,7 @@ export default function Dashboard() {
                                 boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
                                 // width: '500px',
                             }}
-                            onClick={() => {
-                                handleCardClick(book);
-                            }}
+
                         >
                             <CardMedia
                                 component="img"
@@ -109,6 +107,13 @@ export default function Dashboard() {
                                         </Typography>
                                     </a>
                                     : null}
+                                <Button
+                                    variant={"outlined"}
+                                    onClick={() => {
+                                        handleCardClick(book);
+                                    }}>
+                                    View
+                                </Button>
                             </CardContent>
                         </Card>
                         <ReviewModal

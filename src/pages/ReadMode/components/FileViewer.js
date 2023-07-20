@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { Grid, Button, Typography } from '@mui/material';
-import { Document, Page, pdfjs } from 'react-pdf';
-import { ReactReader } from 'react-reader';
+import React, {useEffect, useState} from 'react';
+import {Button, Grid, Typography} from '@mui/material';
+import {Document, Page, pdfjs} from 'react-pdf';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-function FileViewer({ url }) {
+function FileViewer({url}) {
     const [numPages, setNumPages] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
+
 
     useEffect(() => {
         setCurrentPage(1); // Reset the current page when the URL prop changes
@@ -21,9 +21,16 @@ function FileViewer({ url }) {
         setCurrentPage((prevPage) => prevPage + 1);
     };
 
-    function onDocumentLoadSuccess({ numPages }) {
+    function onDocumentLoadSuccess({numPages}) {
         setNumPages(numPages);
     }
+
+    const watermarkText = localStorage.getItem('username');
+    const watermarkOpacity = 0.15;
+    const transform = `rotate(${Math.floor(Math.random() * 91) - 45}deg) translate(${Math.floor(Math.random() * 101) - 50}%, ${Math.floor(Math.random() * 101) - 50}%)`;
+
+
+
 
     if (url && url !== '') {
         const fileType = getFileType(url);
@@ -31,9 +38,43 @@ function FileViewer({ url }) {
         if (fileType === 'application/pdf') {
             return (
                 <Grid item xs={12}>
-                    <div style={{ maxWidth: '800px'}}>
+                    <div
+                        style={{
+                            maxWidth: '800px',
+                            position: 'relative',
+                            pointerEvents: 'none',
+                            userSelect: 'none',
+                        }}>
                         <Document file={url} onLoadSuccess={onDocumentLoadSuccess}>
                             <Page pageNumber={currentPage} />
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    left: 0,
+                                    width: '100%',
+                                    height: '100%',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    pointerEvents: 'none',
+                                }}
+                            >
+                                {[...Array(7)].map((_, index) => (
+                                    <div
+                                        key={index}
+                                        style={{
+                                            opacity: watermarkOpacity,
+                                            color: 'black',
+                                            fontSize: '90px',
+                                            transform,
+                                        }}
+                                    >
+                                        {watermarkText}
+                                    </div>
+                                ))}
+                            </div>
                         </Document>
                     </div>
                     <Typography>
@@ -56,7 +97,7 @@ function FileViewer({ url }) {
         } else if (fileType.startsWith('image/')) {
             return (
                 <Grid item xs={12}>
-                    <img src={url} alt={"Image"} />
+                    <img src={url} alt={"Image"}/>
                 </Grid>
             );
         } else {
