@@ -1,12 +1,16 @@
-import {Card, CardContent, CardMedia, Grid, Typography} from "@mui/material";
+import {Card, CardContent, CardMedia, Chip, Grid, Typography} from "@mui/material";
 import React, {useEffect} from 'react';
 import Api from "../../api/api";
 import ReviewModal from "./components/ReviewModal";
+import API from "../../api/api";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import ClassIcon from "@mui/icons-material/Class";
 
 
 export default function Dashboard() {
     const [books, setBooks] = React.useState([])
     const [categorizedBooks, setCategorizedBooks] = React.useState({})
+    const [categories, setCategories] = React.useState([]);
     const [modalStatus, setModalStatus] = React.useState(false)
     const [modalBook, setModalBook] = React.useState({})
 
@@ -20,6 +24,13 @@ export default function Dashboard() {
                 console.log(error)
             }
         )
+    }, [])
+
+    useEffect(() => {
+        API.get("/library/categories/", {})
+            .then((response) => {
+                setCategories(response.data["results"])
+            })
     }, [])
 
     useEffect(() => {
@@ -42,15 +53,10 @@ export default function Dashboard() {
 
     return (
         <Grid container direction="row">
-            <Grid item xs={12} style={{marginBottom: '20px'}}>
-                <Typography variant="h5">Library</Typography>
-                <Typography variant="h4" style={{color: '#002060'}}>
-                    New Releases
-                </Typography>
-            </Grid>
             <Grid
-                container
+                item
                 spacing={2}
+                xs={8}
                 style={{
                     backgroundColor: '#FFFFFF',
                     padding: '10px',
@@ -61,87 +67,83 @@ export default function Dashboard() {
             >
                 {books.map((book) => (
                     <Grid item key={book.id} xs={12} sm={6} md={4} lg={3}>
-                        <Card style={{borderRadius: '10px'}}>
-                            <CardMedia component="img" alt={book.title} height="200" image={book.cover_image}/>
-                        </Card>
-                        <CardContent>
-                            <Typography variant="subtitle1">{book.title}</Typography>
+                        <Card style={{borderRadius: '10px', display: 'flex'}}
+                              onClick={() => {
+                                  handleCardClick(book);
+                              }}
+                        >
+                            <CardMedia
+                                component="img"
+                                alt={book.title}
+                                height="100"
+                                image={book.cover_image_url}
+                                style={{
+                                    width: '70px',
+                                    objectFit: 'cover',
+                                }}
+                            />
+                            <CardContent>
+                                <Typography variant="subtitle1">{book.title}</Typography>
                                 {book.classification !== "Top Secret" ?
-                            <a
-                                href={book.pdf_file}
-                                download={book.title}
-                                target={"_blank"}
-                                rel={"noreferrer"}
-                                style={{marginRight: '10px'}}>
-                                <Typography variant="subtitle" style={{color: '#002060'}}>
-                                    Download
-                                </Typography>
-                            </a>
-                                : null}
-                        </CardContent>
+                                    <a
+                                        href={book.pdf_file}
+                                        download={book.title}
+                                        target={"_blank"}
+                                        rel={"noreferrer"}
+                                        style={{marginRight: '10px'}}>
+                                        <Typography variant="subtitle" style={{color: '#002060'}}>
+                                            Download
+                                        </Typography>
+                                    </a>
+                                    : null}
+                            </CardContent>
+                        </Card>
+                        <ReviewModal
+                            book={modalBook}
+                            modalStatus={modalStatus}
+                            setModalStatus={setModalStatus}
+                        />
                     </Grid>
                 ))}
             </Grid>
 
-            <Grid container direction="row" style={{marginTop: '20px'}}>
-                <Grid item xs={12}>
-                    <Typography variant="h4" style={{color: '#002060'}}>
-                        Topic
-                    </Typography>
-                </Grid>
+            <Grid item direction="row" xs={4}>
                 <Grid
-                    container
+                    item
                     spacing={2}
                     style={{
                         backgroundColor: '#FFFFFF',
                         padding: '10px',
                         borderRadius: '10px',
                         boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
-                        marginTop: '10px',
+                        margin: '5px',
                     }}
                 >
-                    {Object.keys(categorizedBooks).map((category) => (
-                        <Grid item key={category} xs={12}>
-                            <Typography variant="h6" style={{marginBottom: '10px'}}>
-                                {category}
-                            </Typography>
-                            <Grid container spacing={2}>
-                                {categorizedBooks[category].map((book) => (
-                                    <Grid item key={book.id} xs={12} sm={6} md={4} lg={3}>
-                                        <Card
-                                            style={{ display: 'flex', borderRadius: '10px' }}
-                                            onClick={() => {
-                                                handleCardClick(book);
-                                            }}
-                                        >
-                                            <CardMedia
-                                                component="img"
-                                                alt={book.title}
-                                                height="100"
-                                                image={book.cover_image_url}
-                                                style={{
-                                                    width: '50px',
-                                                    objectFit: 'cover',
-                                                }}
-                                            />
-                                            <CardContent style={{ flexGrow: 1 }}>
-                                                <Typography variant="subtitle1">{book.title}</Typography>
-                                                <Typography variant="subtitle2">{book.author}</Typography>
-                                            </CardContent>
-                                        </Card>
-                                        <ReviewModal
-                                            book={modalBook}
-                                            modalStatus={modalStatus}
-                                            setModalStatus={setModalStatus}
-                                        />
-                                    </Grid>
-                                ))}
-
-
-
-                            </Grid>
-                        </Grid>
-                    ))}
+                    <Typography variant={"h6"}>
+                        Categories
+                    </Typography>
+                    <Grid item container xs={6} direction="row" alignItems="center" spacing={2}>
+                        {categories.length > 0 ? (
+                            categories.map((category) => (
+                                <Grid key={category.id} item>
+                                    <Chip
+                                        variant="outlined"
+                                        color="info"
+                                        label={category.name}
+                                        icon={<ClassIcon/>}
+                                        size="large"
+                                        style={{ fontSize: '20px' }} // Custom style to increase the font size
+                                    />
+                                </Grid>
+                            ))
+                        ) : (
+                            <div>
+                                <Typography variant={"h4"}>
+                                    Categories are listed here
+                                </Typography>
+                            </div>
+                        )}
+                    </Grid>
                 </Grid>
             </Grid>
 

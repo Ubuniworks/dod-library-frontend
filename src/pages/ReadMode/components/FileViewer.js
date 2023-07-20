@@ -31,9 +31,11 @@ function FileViewer({ url }) {
         if (fileType === 'application/pdf') {
             return (
                 <Grid item xs={12}>
-                    <Document file={url} onLoadSuccess={onDocumentLoadSuccess}>
-                        <Page pageNumber={currentPage} />
-                    </Document>
+                    <div style={{ maxWidth: '800px'}}>
+                        <Document file={url} onLoadSuccess={onDocumentLoadSuccess}>
+                            <Page pageNumber={currentPage} />
+                        </Document>
+                    </div>
                     <Typography>
                         Page {currentPage} of {numPages}
                     </Typography>
