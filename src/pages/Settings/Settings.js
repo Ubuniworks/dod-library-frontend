@@ -39,29 +39,6 @@ export default function Settings() {
     return (
         <>
             <Grid container>
-                <Grid container
-                      direction="column"
-                      style={{
-                          backgroundColor: 'white',
-                          borderRadius: '10px',
-                          padding: '10px',
-                          marginLeft: '10px',
-                          width: '96%',
-                          marginBottom: '10px',
-                      }}
-                >
-                    <Typography variant={"h4"}>Upload Book</Typography>
-                    <Button
-                        variant={"contained"}
-                        color={"primary"}
-                        onClick={() => {
-                            setBookOpen(true)
-                        }}
-                    >
-                        Upload Book
-                    </Button>
-                    <AddBookModal open={bookOpen} setOpen={setBookOpen} />
-                </Grid>
 
                 <Grid container
                       direction="column"
