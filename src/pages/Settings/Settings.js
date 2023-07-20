@@ -4,10 +4,7 @@ import {Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, 
 
 export default function Settings() {
     const [users, setUsers] = React.useState([]);
-    const [openEdit, setOpenEdit] = useState(false)
-    const [open, setOpen] = useState(false)
-    const [bookOpen, setBookOpen] = useState(false)
-    const [selectedUser, setSelectedUser] = useState({});
+
 
     const isAdmin = localStorage.getItem('is_admin') === 'true';
 
