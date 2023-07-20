@@ -1,9 +1,8 @@
 import {Card, CardContent, CardMedia, Chip, Grid, Typography} from "@mui/material";
 import React, {useEffect} from 'react';
 import Api from "../../api/api";
-import ReviewModal from "./components/ReviewModal";
 import API from "../../api/api";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import ReviewModal from "./components/ReviewModal";
 import ClassIcon from "@mui/icons-material/Class";
 
 
@@ -66,7 +65,7 @@ export default function Dashboard() {
                 }}
             >
                 {books.map((book) => (
-                    <Grid item key={book.id} xs={12} sm={6} md={4} lg={3}>
+                    <Grid item direction={"row"} key={book.id} xs={12} sm={6} md={4} lg={3}>
                         <Card style={{borderRadius: '10px', display: 'flex'}}
                               onClick={() => {
                                   handleCardClick(book);
@@ -132,7 +131,7 @@ export default function Dashboard() {
                                         label={category.name}
                                         icon={<ClassIcon/>}
                                         size="large"
-                                        style={{ fontSize: '20px' }} // Custom style to increase the font size
+                                        style={{fontSize: '20px'}} // Custom style to increase the font size
                                     />
                                 </Grid>
                             ))

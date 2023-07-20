@@ -24,25 +24,26 @@ export default function MainLayout() {
     return (
         <div style={{
             display: "flex",
-            position: "absolute",
-            width: "100%",
+            // position: "absolute",
+            // width: "100%",
             margin: 0,
             padding: 0,
-            height: "100%",
+            height: "100vh",
         }}>
             <Container style={{
                 maxWidth: "250px",
                 padding: 0,
                 margin: 0,
-                height: "100%",
+                // height: "100%",
             }}>
                 <SideMenu/>
             </Container>
             <div style={{
                 backgroundColor: "#E5E5E5",
-                height: "100%",
+                // height: "100%",
                 width: "100%",
                 overflowY: "auto",
+                overflowX: "hidden",
                 // maxHeight: "100vh"
             }}>
                 <Grid
@@ -50,9 +51,9 @@ export default function MainLayout() {
                     justifyContent={"space-between"}
                     style={{
                         backgroundColor: "white",
-                        margin: 5,
-                        borderRadius: 20,
-                        padding: 7,
+                        margin: 0,
+                        borderRadius: 5,
+                        padding: 0,
                     }}
                 >
                     {/*For other items in the header*/}
@@ -79,9 +80,6 @@ export default function MainLayout() {
                                     <Typography align={"right"}>
                                         {first_name} {last_name}
                                     </Typography>
-                                    <Typography variant={"caption"} color={"#77c0a3"}>
-                                        {user_type}
-                                    </Typography>
                                 </CardContent>
                             </Card>
                         </Grid>
@@ -104,7 +102,7 @@ export default function MainLayout() {
                 {/*Main Content*/}
                 <div style={{
                     marginTop: 10,
-                    padding: 10,
+                    padding: 0,
                 }}>
                     <Outlet/>
                 </div>
