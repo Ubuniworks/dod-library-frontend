@@ -2,7 +2,6 @@ import * as React from "react";
 import {useEffect} from "react";
 import {Button, Chip, Grid, TextField, Typography} from "@mui/material";
 import API from "../../api/api";
-import FaceIcon from '@mui/icons-material/Face';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ClassIcon from '@mui/icons-material/Class';
 
@@ -67,6 +66,7 @@ export default function Categories() {
                                 onDelete={() => handleDelete(category.id)}
                                 icon={<ClassIcon/>}
                                 size="large"
+                                style={{ fontSize: '20px' }} // Custom style to increase the font size
                             />
                         </Grid>
                     ))
