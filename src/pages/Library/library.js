@@ -1,6 +1,5 @@
 import {Button, Card, CardContent, CardMedia, Chip, Grid, Typography} from "@mui/material";
 import React, {useEffect, useState} from 'react';
-import Api from "../../api/api";
 import API from "../../api/api";
 import ReviewModal from "./components/ReviewModal";
 import ClassIcon from "@mui/icons-material/Class";
@@ -37,17 +36,6 @@ export default function Dashboard() {
             })
     }, [])
 
-    // useEffect(() => {
-    //     Api.get("library/books/get_categorized_books/").then(
-    //         response => {
-    //             setCategorizedBooks(response.data)
-    //         }
-    //     ).catch(
-    //         error => {
-    //             console.log(error)
-    //         }
-    //     )
-    // }, [])
 
     const handleNextPage = () => {
         setCurrentPage((prevPage) => prevPage + 1);
@@ -90,10 +78,10 @@ export default function Dashboard() {
                                 margin: '5px',
                                 boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
                                 // width: '500px',
-                        }}
-                              onClick={() => {
-                                  handleCardClick(book);
-                              }}
+                            }}
+                            onClick={() => {
+                                handleCardClick(book);
+                            }}
                         >
                             <CardMedia
                                 component="img"

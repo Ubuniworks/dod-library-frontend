@@ -68,8 +68,8 @@ export default function RequestsPage() {
             >
                 {isAdmin ?
                     <>
-                    <Typography variant={"h4"}>Requests</Typography>
-                    <TableContainer component={Paper}>
+                        <Typography variant={"h4"}>Requests</Typography>
+                        <TableContainer component={Paper}>
 
                             <Table>
                                 <TableHead>
@@ -88,13 +88,14 @@ export default function RequestsPage() {
                                             <TableCell>{book.year}</TableCell>
                                             <TableCell>{book.user}</TableCell>
                                         </TableRow>
-                                    )): null}
+                                    )) : null}
                                 </TableBody>
                             </Table>
 
-                    </TableContainer>
+                        </TableContainer>
                     </>
                     : null}
             </Grid>
         </Grid>
-    )}
+    )
+}

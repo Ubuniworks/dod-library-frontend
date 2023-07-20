@@ -66,7 +66,7 @@ export default function Categories() {
                                 onDelete={() => handleDelete(category.id)}
                                 icon={<ClassIcon/>}
                                 size="large"
-                                style={{ fontSize: '20px' }} // Custom style to increase the font size
+                                style={{fontSize: '20px'}} // Custom style to increase the font size
                             />
                         </Grid>
                     ))

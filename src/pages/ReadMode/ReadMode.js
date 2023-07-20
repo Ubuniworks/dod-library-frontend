@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {pdfjs} from 'react-pdf';
-import PDFViewer from "./components/FileViewer";
+import FileViewer from "./components/FileViewer";
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import Api from "../../api/api";
 import {Button} from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import FileViewer from "./components/FileViewer";
 
 
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
