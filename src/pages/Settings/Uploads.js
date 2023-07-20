@@ -57,7 +57,7 @@ const UploadBook = () => {
 
 
     // Perform form submission and data processing
-    function uploadBook(event, title, year, author, file, coverImage, info, selectedTopic) {
+    function uploadBook(event, title, year, author, file, coverImage, info, selectedTopic, selectedClassification) {
         event.preventDefault();
         // post form data to backend
         let formData = new FormData();
@@ -73,7 +73,7 @@ const UploadBook = () => {
         API.post('/library/books/upload_book/', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
-            }, timeout: 160000,
+            }, timeout: 150000,
         }).then((response) => {
             if (response.status === 201) {
                 alert("Book added successfully")
@@ -189,7 +189,8 @@ const UploadBook = () => {
                                 <input
                                     type="file"
                                     accept="image/*"
-                                    onChange={(event) => setCoverImage(event.target.files[0])}/>
+                                    onChange={(event) =>
+                                        setCoverImage(event.target.files[0])}/>
                             </Grid>
                             <Grid item xs={6}>
                                 <TextField
@@ -217,7 +218,7 @@ const UploadBook = () => {
                                     <Button type="submit" variant="contained" fullWidth
                                             onClick={(event) => {
                                                 event.preventDefault();
-                                                uploadBook(event, title, year, author, file, coverImage, backgroundInfo, selectedCategory)
+                                                uploadBook(event, title, year, author, file, coverImage, backgroundInfo, selectedCategory, selectedClassification)
                                             }}
                                     >
                                         Submit
