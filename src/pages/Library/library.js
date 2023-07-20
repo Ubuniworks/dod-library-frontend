@@ -9,7 +9,7 @@ import RequestBookModal from "./components/RequestBookModal";
 
 export default function Dashboard() {
     const [books, setBooks] = React.useState([])
-    const [categorizedBooks, setCategorizedBooks] = React.useState({})
+    // const [categorizedBooks, setCategorizedBooks] = React.useState({})
     const [categories, setCategories] = React.useState([]);
     const [modalStatus, setModalStatus] = React.useState(false)
     const [reviewModalStatus, setReviewModalStatus] = React.useState(false)
@@ -37,17 +37,17 @@ export default function Dashboard() {
             })
     }, [])
 
-    useEffect(() => {
-        Api.get("library/books/get_categorized_books/").then(
-            response => {
-                setCategorizedBooks(response.data)
-            }
-        ).catch(
-            error => {
-                console.log(error)
-            }
-        )
-    }, [])
+    // useEffect(() => {
+    //     Api.get("library/books/get_categorized_books/").then(
+    //         response => {
+    //             setCategorizedBooks(response.data)
+    //         }
+    //     ).catch(
+    //         error => {
+    //             console.log(error)
+    //         }
+    //     )
+    // }, [])
 
     const handleNextPage = () => {
         setCurrentPage((prevPage) => prevPage + 1);
