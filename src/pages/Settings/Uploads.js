@@ -1,6 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import {Box, Button, Grid, MenuItem, TextField, Typography} from '@mui/material';
+import {
+    Box,
+    Button,
+    Grid,
+    MenuItem,
+    Paper,
+    Table, TableBody, TableCell,
+    TableContainer,
+    TableHead, TableRow,
+    TextField,
+    Typography
+} from '@mui/material';
 import API from "../../api/api";
+import Api from "../../api/api";
 
 const UploadBook = () => {
     const [title, setTitle] = useState('');
@@ -12,6 +24,9 @@ const UploadBook = () => {
     const [topics, setTopics] = useState([]);
     const [classifications, setClassifications] = useState([]);
     const [selectedClassification, setSelectedClassification] = useState('');
+    const [books, setBooks] = useState([]);
+
+    const isAdmin = localStorage.getItem('is_admin') === 'true';
 
     const handleInputChange = (event) => {
         const {name, value} = event.target;
@@ -23,6 +38,18 @@ const UploadBook = () => {
     const handleTopicChange = (event) => {
         setSelectedCategory(event.target.value);
     };
+
+    useEffect(() => {
+        Api.get("library/requested-books/").then(
+            response => {
+                setBooks(response.data["results"])
+            }
+        ).catch(
+            error => {
+                console.log(error)
+            }
+        )
+    }, [])
 
 
     // Perform form submission and data processing
@@ -77,17 +104,17 @@ const UploadBook = () => {
         >
             <>
                 <Box sx={{
-                    width: "100%",
+                    width: "90%",
                     height: "80%",
                     backgroundColor: "#FFFFFF",
                     borderRadius: "10px",
                     boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-                    padding: "25px",
+                    padding: "10px",
                     overflow: "auto",
                 }}>
                     <form>
                         <Grid container spacing={2}>
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <TextField
                                     label="Title"
                                     name="title"
@@ -97,7 +124,7 @@ const UploadBook = () => {
                                     required
                                 />
                             </Grid>
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <TextField
                                     label="Author"
                                     name="author"
@@ -107,7 +134,7 @@ const UploadBook = () => {
                                     required
                                 />
                             </Grid>
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <TextField
                                     select
                                     label="Category"
@@ -124,7 +151,7 @@ const UploadBook = () => {
                                     ))}
                                 </TextField>
                             </Grid>
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <TextField
                                     select
                                     label="Classification"
@@ -141,7 +168,7 @@ const UploadBook = () => {
                                     ))}
                                 </TextField>
                             </Grid>
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <Typography variant="h5" gutterBottom>
                                     Upload Book
                                 </Typography>
@@ -150,7 +177,7 @@ const UploadBook = () => {
                                        onChange={(event) =>
                                            setFile(event.target.files[0])}/>
                             </Grid>
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <Typography variant="h5" gutterBottom>
                                     Book Cover
                                 </Typography>
@@ -159,7 +186,7 @@ const UploadBook = () => {
                                     accept="image/*"
                                     onChange={(event) => setCoverImage(event.target.files[0])}/>
                             </Grid>
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <TextField
                                     label="Background Info"
                                     name="backgroundInfo"
@@ -170,7 +197,7 @@ const UploadBook = () => {
                                     rows={4}
                                 />
                             </Grid>
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <Button type="submit" variant="contained" fullWidth
                                         onClick={(event) => {
                                             event.preventDefault();
@@ -184,6 +211,46 @@ const UploadBook = () => {
                     </form>
                 </Box>
             </>
+            <Grid container
+                  direction="column"
+                  style={{
+                      backgroundColor: 'white',
+                      borderRadius: '10px',
+                      padding: '10px',
+                      width: '90%',
+                      marginTop: '10px',
+                  }}
+            >
+                {isAdmin ?
+                    <>
+                        <Typography variant={"h4"}>Requests</Typography>
+                        <TableContainer component={Paper}>
+
+                            <Table>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>Name</TableCell>
+                                        <TableCell>Author</TableCell>
+                                        <TableCell>Year</TableCell>
+                                        <TableCell>Requested by</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {books.length > 0 ? books.map((book) => (
+                                        <TableRow key={book.id}>
+                                            <TableCell>{book.name}</TableCell>
+                                            <TableCell>{book.author}</TableCell>
+                                            <TableCell>{book.year}</TableCell>
+                                            <TableCell>{book.user}</TableCell>
+                                        </TableRow>
+                                    )): null}
+                                </TableBody>
+                            </Table>
+
+                        </TableContainer>
+                    </>
+                    : null}
+            </Grid>
         </Grid>
     );
 };
