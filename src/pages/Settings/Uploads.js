@@ -5,9 +5,12 @@ import {
     Grid,
     MenuItem,
     Paper,
-    Table, TableBody, TableCell,
+    Table,
+    TableBody,
+    TableCell,
     TableContainer,
-    TableHead, TableRow,
+    TableHead,
+    TableRow,
     TextField,
     Typography
 } from '@mui/material';
@@ -25,6 +28,7 @@ const UploadBook = () => {
     const [classifications, setClassifications] = useState([]);
     const [selectedClassification, setSelectedClassification] = useState('');
     const [books, setBooks] = useState([]);
+    const [year, setYear] = useState(new Date().getFullYear());
 
     const isAdmin = localStorage.getItem('is_admin') === 'true';
 
@@ -53,7 +57,7 @@ const UploadBook = () => {
 
 
     // Perform form submission and data processing
-    function uploadBook(event, title, author, file, coverImage, info, selectedTopic) {
+    function uploadBook(event, title, year, author, file, coverImage, info, selectedTopic) {
         event.preventDefault();
         // post form data to backend
         let formData = new FormData();
@@ -64,6 +68,7 @@ const UploadBook = () => {
         formData.append('classification', selectedClassification);
         formData.append('pdf_file', file);
         formData.append('cover_image', coverImage);
+        formData.append('year', year);
 
         API.post('/library/books/upload_book/', formData, {
             headers: {
@@ -197,15 +202,27 @@ const UploadBook = () => {
                                     rows={4}
                                 />
                             </Grid>
-                            <Grid item xs={6}>
-                                <Button type="submit" variant="contained" fullWidth
-                                        onClick={(event) => {
-                                            event.preventDefault();
-                                            uploadBook(event, title, author, file, coverImage, backgroundInfo, selectedCategory)
-                                        }}
-                                >
-                                    Submit
-                                </Button>
+                            <Grid item container spacing={2} direction={"column"} xs={6}>
+                                <Grid item xs={3}>
+                                    <TextField
+                                        label="Year of Publication"
+                                        name="year"
+                                        type={"number"}
+                                        value={year}
+                                        onChange={(event) => setYear(event.target.value)}
+                                        fullWidth
+                                    />
+                                </Grid>
+                                <Grid item xs={3}>
+                                    <Button type="submit" variant="contained" fullWidth
+                                            onClick={(event) => {
+                                                event.preventDefault();
+                                                uploadBook(event, title, year, author, file, coverImage, backgroundInfo, selectedCategory)
+                                            }}
+                                    >
+                                        Submit
+                                    </Button>
+                                </Grid>
                             </Grid>
                         </Grid>
                     </form>
@@ -243,7 +260,7 @@ const UploadBook = () => {
                                             <TableCell>{book.year}</TableCell>
                                             <TableCell>{book.user}</TableCell>
                                         </TableRow>
-                                    )): null}
+                                    )) : null}
                                 </TableBody>
                             </Table>
 

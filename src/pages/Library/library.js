@@ -1,5 +1,5 @@
 import {Button, Card, CardContent, CardMedia, Chip, Grid, Typography} from "@mui/material";
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import Api from "../../api/api";
 import API from "../../api/api";
 import ReviewModal from "./components/ReviewModal";
@@ -14,18 +14,21 @@ export default function Dashboard() {
     const [modalStatus, setModalStatus] = React.useState(false)
     const [reviewModalStatus, setReviewModalStatus] = React.useState(false)
     const [modalBook, setModalBook] = React.useState({})
+    const [currentPage, setCurrentPage] = useState(1);
+
+
+    const fetchBooks = async (page) => {
+        try {
+            const response = await API.get(`library/books/?page=${page}`);
+            setBooks(response.data["results"]);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     useEffect(() => {
-        Api.get("library/books/").then(
-            response => {
-                setBooks(response.data["results"])
-            }
-        ).catch(
-            error => {
-                console.log(error)
-            }
-        )
-    }, [])
+        fetchBooks(currentPage);
+    }, [currentPage])
 
     useEffect(() => {
         API.get("/library/categories/", {})
@@ -45,6 +48,15 @@ export default function Dashboard() {
             }
         )
     }, [])
+
+    const handleNextPage = () => {
+        setCurrentPage((prevPage) => prevPage + 1);
+    };
+
+    const handlePrevPage = () => {
+        setCurrentPage((prevPage) => prevPage - 1);
+    };
+
 
     const handleCardClick = (book) => {
         setModalBook(book);
@@ -95,6 +107,8 @@ export default function Dashboard() {
                             />
                             <CardContent>
                                 <Typography variant="subtitle1">{book.title}</Typography>
+                                <Typography variant="subtitle2">{book.year_of_publication} </Typography>
+                                <Typography variant="subtitle2">{book.background_info}</Typography>
                                 {book.classification !== "Top Secret" ?
                                     <a
                                         href={book.pdf_file}
@@ -116,6 +130,10 @@ export default function Dashboard() {
                         />
                     </Grid>
                 ))}
+                <Button disabled={currentPage <= 1} onClick={handlePrevPage}>
+                    Previous Page
+                </Button>
+                <Button onClick={handleNextPage}>Next Page</Button>
             </Grid>
 
             <Grid item direction="row" xs={4}>
