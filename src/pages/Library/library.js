@@ -12,6 +12,7 @@ export default function Dashboard() {
     const [categorizedBooks, setCategorizedBooks] = React.useState({})
     const [categories, setCategories] = React.useState([]);
     const [modalStatus, setModalStatus] = React.useState(false)
+    const [reviewModalStatus, setReviewModalStatus] = React.useState(false)
     const [modalBook, setModalBook] = React.useState({})
 
     useEffect(() => {
@@ -47,7 +48,7 @@ export default function Dashboard() {
 
     const handleCardClick = (book) => {
         setModalBook(book);
-        setModalStatus(true);
+        setReviewModalStatus(true);
     };
 
 
@@ -55,8 +56,9 @@ export default function Dashboard() {
         <Grid container direction="row">
             <Grid
                 item
-                spacing={2}
                 xs={8}
+                direction={"column"}
+                spacing={2}
                 style={{
                     backgroundColor: '#FFFFFF',
                     padding: '10px',
@@ -66,8 +68,17 @@ export default function Dashboard() {
                 }}
             >
                 {books.map((book) => (
-                    <Grid item direction={"row"} key={book.id} xs={12} sm={6} md={4} lg={3}>
-                        <Card style={{borderRadius: '10px', display: 'flex'}}
+                    <Grid item direction={"row"}
+                          spacing={2}
+                          key={book.id} xs={12} sm={6} md={4} lg={3}>
+                        <Card
+                            style={{
+                                borderRadius: '10px',
+                                display: 'flex',
+                                margin: '5px',
+                                boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+                                // width: '500px',
+                        }}
                               onClick={() => {
                                   handleCardClick(book);
                               }}
@@ -100,8 +111,8 @@ export default function Dashboard() {
                         </Card>
                         <ReviewModal
                             book={modalBook}
-                            modalStatus={modalStatus}
-                            setModalStatus={setModalStatus}
+                            reviewModalStatus={reviewModalStatus}
+                            setReviewModalStatus={setReviewModalStatus}
                         />
                     </Grid>
                 ))}

@@ -1,7 +1,7 @@
 import React from "react";
 import {Box, Button, Card, CardContent, CardMedia, Grid, Modal, Typography} from "@mui/material";
 
-export default function ReviewModal({modalStatus, setModalStatus, onClose, book}) {
+export default function ReviewModal({reviewModalStatus, setReviewModalStatus, onClose, book}) {
     // const history = useHistory();
 
 
@@ -15,7 +15,7 @@ export default function ReviewModal({modalStatus, setModalStatus, onClose, book}
 
     return (
         <Modal
-            open={modalStatus}
+            open={reviewModalStatus}
             onClose={onClose}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
@@ -45,7 +45,7 @@ export default function ReviewModal({modalStatus, setModalStatus, onClose, book}
                             width: "100px",
                         }}
                         onClick={() => {
-                            setModalStatus(false);
+                            setReviewModalStatus(false);
                         }}
                     >
                         close</Button>
@@ -109,7 +109,7 @@ export default function ReviewModal({modalStatus, setModalStatus, onClose, book}
                                 height: '20px',
                             }}
                             onClick={() => {
-                                setModalStatus(false);
+                                setReviewModalStatus(false);
                                 handleReadClick();
                             }}
                         >
