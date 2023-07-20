@@ -1,21 +1,6 @@
 import React, {useEffect, useState} from "react"
 import API from "../../api/api";
-import {
-    Button,
-    Grid,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-    Typography
-} from "@mui/material";
-import DisableButton from "./components/DisableButton";
-import EnableButton from "./components/EnableButton";
-import CreateUsers from "./components/CreateUsers";
-import ViewEditUser from "./components/ViewEditUser";
-import AddBookModal from "./components/UploadBook";
+import {Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography} from "@mui/material";
 
 export default function Settings() {
     const [users, setUsers] = React.useState([]);
@@ -50,8 +35,6 @@ export default function Settings() {
                           width: '96%',
                       }}
                 >
-
-
                     <Grid
                         item
                         style={{
