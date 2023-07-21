@@ -91,7 +91,14 @@ export default function MainLayout() {
                     }}
                 >
                     {/*For other items in the header*/}
-                    <Grid item>
+                    <Grid item xs={8}
+                          justifyContent={"center"}
+                          justifyItems={"center"}
+                          alignItems={"center"}
+                          style={{
+                              alignItems: "center",
+                              }}
+                    >
                         <TextField
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
@@ -101,7 +108,11 @@ export default function MainLayout() {
                             justifyItems={"center"}
                             justifyContent={"center"}
                             style={{
-                                width: 700,
+                                width: 400,
+                                // alignItems: "center",
+                                justifyContent: "center",
+                                justifyItems: "center",
+                                marginLeft: 250,
                             }}
                             InputProps={{
                                 endAdornment: (
@@ -144,18 +155,19 @@ export default function MainLayout() {
                     </Grid>
                     {/*For the Logged in user name display*/}
                     <Grid
+                        xs={4}
                         item
                         style={{
                             marginTop: 10,
-                            alignItems: "center"
+                            alignItems: "right"
                         }}
                     >
                         <Grid item>
                             <Card
                                 style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    maxHeight: 30,
+                                    // display: "flex",
+                                    alignItems: "right",
+                                    // maxHeight: 30,
                                     boxShadow: "none",
                                 }}
                             >
