@@ -5,6 +5,7 @@ import Tooltip from '@mui/material/Tooltip';
 import SideMenu from "./SideMenu";
 import SearchIcon from "@mui/icons-material/Search";
 import Api from "../api/api";
+import ReviewModal from "../pages/Library/components/ReviewModal";
 
 
 Object.defineProperty(String.prototype, "capitalize", {
@@ -18,6 +19,8 @@ export default function MainLayout() {
     const [searchTerm, setSearchTerm] = useState('');
     const [results, setResults] = useState([]);
     const [open, setOpen] = React.useState(false);
+    const [modalBook, setModalBook] = React.useState({})
+    const [reviewModalStatus, setReviewModalStatus] = React.useState(false)
     let first_name = localStorage.getItem("user_first_name").capitalize();
     let last_name = localStorage.getItem("user_last_name").capitalize();
 
@@ -28,6 +31,12 @@ export default function MainLayout() {
     const handleClose = () => {
         setOpen(false);
     };
+
+    const handleCardClick = (book) => {
+        setModalBook(book);
+        setReviewModalStatus(true);
+    };
+
 
 
     function search() {
@@ -105,13 +114,23 @@ export default function MainLayout() {
                             <DialogTitle>Search Results</DialogTitle>
                             <DialogContent>
                                 {results.map((result) => (
-                                    <div key={result.id} style={{ borderBottom: '1px solid #ccc', marginBottom: '10px', paddingBottom: '10px' }}>
+                                    <div
+                                        key={result.id}
+                                        onClick={() => {
+                                            handleCardClick(result);
+                                        }}
+                                        style={{ borderBottom: '1px solid #ccc', marginBottom: '10px', paddingBottom: '10px' }}>
                                         <Typography variant="h6">{result.title}</Typography>
                                         <Typography>Author: {result.author}</Typography>
                                         {/* Add other fields you want to display */}
                                     </div>
                                 ))}
                             </DialogContent>
+                            <ReviewModal
+                                book={modalBook}
+                                reviewModalStatus={reviewModalStatus}
+                                setReviewModalStatus={setReviewModalStatus}
+                            />
                             <DialogActions>
                                 <Button onClick={handleClose} color="primary">
                                     Close
