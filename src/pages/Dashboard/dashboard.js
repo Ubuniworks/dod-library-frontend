@@ -157,7 +157,12 @@ export default function Dashboard() {
                     ))}
                 </Grid>
             )}
-            <Typography variant={"h5"}>
+            <Typography
+                variant={"h5"}
+                style={{
+                    marginTop: '20px',
+                }}
+            >
                 Notice Board
             </Typography>
             <Typography>

@@ -59,13 +59,13 @@ export default function ReadMode() {
                         justifyContent: 'center',
 
                     }}>
-                    <Button
-                        variant="contained"
-                        startIcon={<FavoriteIcon/>}
-                        onClick={markFavorite}
-                    >
-                        Favourite
-                    </Button>
+                    {/*<Button*/}
+                    {/*    variant="contained"*/}
+                    {/*    startIcon={<FavoriteIcon/>}*/}
+                    {/*    onClick={markFavorite}*/}
+                    {/*>*/}
+                    {/*    Favourite*/}
+                    {/*</Button>*/}
                     <h1>{bookData.title}</h1>
                     <FileViewer url={bookData.pdf_file_url}/>
                 </div>

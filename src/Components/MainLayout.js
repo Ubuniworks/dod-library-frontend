@@ -6,7 +6,7 @@ import SideMenu from "./SideMenu";
 import SearchIcon from "@mui/icons-material/Search";
 import Api from "../api/api";
 import ReviewModal from "../pages/Library/components/ReviewModal";
-
+import { useLocation } from 'react-router-dom';
 
 Object.defineProperty(String.prototype, "capitalize", {
     value: function () {
@@ -23,6 +23,9 @@ export default function MainLayout() {
     const [reviewModalStatus, setReviewModalStatus] = React.useState(false)
     let first_name = localStorage.getItem("user_first_name").capitalize();
     let last_name = localStorage.getItem("user_last_name").capitalize();
+
+    const location = useLocation();
+
 
     const handleOpen = () => {
         setOpen(true);
