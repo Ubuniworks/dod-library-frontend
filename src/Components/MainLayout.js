@@ -40,7 +40,7 @@ export default function MainLayout() {
 
 
     function search() {
-        Api.post("/library/advanced_search/", {
+        Api.post("/library/books/advanced_search/", {
             "search_term": searchTerm,
         }).then((response) => {
             if (response.data["results"].length === 0) {
