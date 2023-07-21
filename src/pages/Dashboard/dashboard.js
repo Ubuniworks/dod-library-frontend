@@ -19,8 +19,8 @@ export default function Dashboard() {
 
     const fetchNotices = async () => {
         try {
-            const response = await Api.get('/library/notices/?limit=10'); // Fetch the 10 most recent notices from the API
-            setNotices(response.data["results"]);
+            const response = await Api.get('/library/notices/'); // Fetch the 10 most recent notices from the API
+            setNotices(response.data);
         } catch (error) {
             console.error(error);
         }
@@ -159,6 +159,9 @@ export default function Dashboard() {
             )}
             <Typography variant={"h5"}>
                 Notice Board
+            </Typography>
+            <Typography>
+                Click on Card to view more
             </Typography>
             <Grid item>
                 {notices.length > 0 ? notices.map((notice) => (
