@@ -1,8 +1,10 @@
-import React from "react";
-import {Avatar, Card, CardContent, Container, Grid, IconButton, Typography,} from "@mui/material";
+import React, {useState} from "react";
+import {Avatar, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Card, CardContent, Container, Grid, IconButton, TextField, Typography,} from "@mui/material";
 import {Outlet} from "react-router-dom";
 import Tooltip from '@mui/material/Tooltip';
 import SideMenu from "./SideMenu";
+import SearchIcon from "@mui/icons-material/Search";
+import Api from "../api/api";
 
 
 Object.defineProperty(String.prototype, "capitalize", {
@@ -13,14 +15,37 @@ Object.defineProperty(String.prototype, "capitalize", {
 });
 
 export default function MainLayout() {
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [results, setResults] = useState([]);
+    const [open, setOpen] = React.useState(false);
     let first_name = localStorage.getItem("user_first_name").capitalize();
     let last_name = localStorage.getItem("user_last_name").capitalize();
-    let user_type = localStorage.getItem("user_type");
-    const open = Boolean(anchorEl);
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
+
+    const handleOpen = () => {
+        setOpen(true);
     };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+
+    function search() {
+        Api.post("/library/advanced_search/", {
+            "search_term": searchTerm,
+        }).then((response) => {
+            if (response.data["results"].length === 0) {
+                alert("No results found")
+                return;
+            } else {
+                setResults(response.data["results"]);
+                handleOpen()
+            }
+        }).catch((error) => {
+            console.error(error);
+        })
+    }
+
     return (
         <div style={{
             display: "flex",
@@ -55,7 +80,46 @@ export default function MainLayout() {
                 >
                     {/*For other items in the header*/}
                     <Grid item>
-                        </Grid>
+                        <TextField
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            placeholder="Enter search term e.g book title or author name"
+                            variant="outlined"
+                            required={true}
+                            justifyItems={"center"}
+                            justifyContent={"center"}
+                            style={{
+                                width: 700,
+                            }}
+                            InputProps={{
+                                endAdornment: (
+                                    <IconButton
+                                        onClick={search}
+                                    >
+                                        <SearchIcon/>
+                                    </IconButton>
+                                ),
+                            }}
+                        />
+                        <Dialog open={open} onClose={handleClose} maxWidth="md">
+                            <DialogTitle>Search Results</DialogTitle>
+                            <DialogContent>
+                                {results.map((result) => (
+                                    <div key={result.id} style={{ borderBottom: '1px solid #ccc', marginBottom: '10px', paddingBottom: '10px' }}>
+                                        <Typography variant="h6">{result.title}</Typography>
+                                        <Typography>Author: {result.author}</Typography>
+                                        {/* Add other fields you want to display */}
+                                    </div>
+                                ))}
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={handleClose} color="primary">
+                                    Close
+                                </Button>
+                            </DialogActions>
+                        </Dialog>
+
+                    </Grid>
                     {/*For the Logged in user name display*/}
                     <Grid
                         item

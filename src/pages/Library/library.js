@@ -84,7 +84,7 @@ export default function Dashboard() {
                             <CardMedia
                                 component="img"
                                 alt={book.title}
-                                height="100"
+                                height="150"
                                 image={book.cover_image_url}
                                 style={{
                                     width: '70px',
