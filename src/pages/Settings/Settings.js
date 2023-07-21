@@ -1,11 +1,22 @@
-import React, {useEffect, useState} from "react"
+import React, {useEffect} from "react"
 import API from "../../api/api";
-import {Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography} from "@mui/material";
+import {
+    Button,
+    Grid,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Typography
+} from "@mui/material";
 
 export default function Settings() {
     const [users, setUsers] = React.useState([]);
 
 
+    const myId = localStorage.getItem('user_id');
     const isAdmin = localStorage.getItem('is_admin') === 'true';
 
     // ensure that logged-in user is admin
@@ -48,6 +59,7 @@ export default function Settings() {
                             <TableHead>
                                 <TableCell>First Name</TableCell>
                                 <TableCell>Last Name</TableCell>
+                                <TableCell>Action</TableCell>
                             </TableHead>
                             <TableBody>
                                 {users.map((user) => (
@@ -58,9 +70,50 @@ export default function Settings() {
                                     >
                                         <TableCell>{user.first_name}</TableCell>
                                         <TableCell>{user.last_name}</TableCell>
+                                        <TableCell>
+                                            {user.is_admin ? (
+                                                myId !== user.id ? (
+                                                    <Button
+                                                        variant="outlined"
+                                                        color="warning"
+                                                        onClick={() => {
+                                                            API.patch(`/auth/users/${user.id}/`, {
+                                                                is_admin: false
+                                                            })
+                                                                .then((response) => {
+                                                                    window.location.reload();
+                                                                })
+                                                                .catch((error) => {
+                                                                    console.log(error);
+                                                                });
+                                                        }}
+                                                    >
+                                                        Remove Admin
+                                                    </Button>
+                                                ) : null
+                                            ) : (
+                                                <Button
+                                                    variant="outlined"
+                                                    onClick={() => {
+                                                        API.patch(`/auth/users/${user.id}/`, {
+                                                            is_admin: true
+                                                        })
+                                                            .then((response) => {
+                                                                window.location.reload();
+                                                            })
+                                                            .catch((error) => {
+                                                                console.log(error);
+                                                            });
+                                                    }}
+                                                >
+                                                    Make Admin
+                                                </Button>
+                                            )}
+
+                                    </TableCell>
                                     </TableRow>
 
-                                ))}
+                                    ))}
                             </TableBody>
                         </Table>
                     </TableContainer>
