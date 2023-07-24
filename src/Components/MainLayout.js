@@ -99,31 +99,31 @@ export default function MainLayout() {
                               alignItems: "center",
                               }}
                     >
-                        <TextField
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            placeholder="Enter search term e.g book title or author name"
-                            variant="outlined"
-                            required={true}
-                            justifyItems={"center"}
-                            justifyContent={"center"}
-                            style={{
-                                width: 400,
-                                // alignItems: "center",
-                                justifyContent: "center",
-                                justifyItems: "center",
-                                marginLeft: 250,
-                            }}
-                            InputProps={{
-                                endAdornment: (
-                                    <IconButton
-                                        onClick={search}
-                                    >
-                                        <SearchIcon/>
-                                    </IconButton>
-                                ),
-                            }}
-                        />
+                        {/*<TextField*/}
+                        {/*    value={searchTerm}*/}
+                        {/*    onChange={(e) => setSearchTerm(e.target.value)}*/}
+                        {/*    placeholder="Enter search term e.g book title or author name"*/}
+                        {/*    variant="outlined"*/}
+                        {/*    required={true}*/}
+                        {/*    justifyItems={"center"}*/}
+                        {/*    justifyContent={"center"}*/}
+                        {/*    style={{*/}
+                        {/*        width: 400,*/}
+                        {/*        // alignItems: "center",*/}
+                        {/*        justifyContent: "center",*/}
+                        {/*        justifyItems: "center",*/}
+                        {/*        marginLeft: 250,*/}
+                        {/*    }}*/}
+                        {/*    InputProps={{*/}
+                        {/*        endAdornment: (*/}
+                        {/*            <IconButton*/}
+                        {/*                onClick={search}*/}
+                        {/*            >*/}
+                        {/*                <SearchIcon/>*/}
+                        {/*            </IconButton>*/}
+                        {/*        ),*/}
+                        {/*    }}*/}
+                        {/*/>*/}
                         <Dialog open={open} onClose={handleClose} maxWidth="md">
                             <DialogTitle>Search Results</DialogTitle>
                             <DialogContent>
