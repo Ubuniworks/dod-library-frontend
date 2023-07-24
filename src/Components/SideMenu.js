@@ -19,7 +19,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
 
 export default function SideMenu() {
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState(false);
 
     const isAdmin = localStorage.getItem('is_admin') === 'true';
     const handleClick = () => {
