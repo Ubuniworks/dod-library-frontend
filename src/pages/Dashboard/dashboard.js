@@ -178,9 +178,7 @@ export default function Dashboard() {
                             boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
                             width: '500px',
                         }}
-                        onClick={() => {
-                            handleCardClick(notice);
-                        }}
+
                     >
                         <CardMedia
                             component="img"
@@ -199,6 +197,14 @@ export default function Dashboard() {
                             <Typography sx={{mb: 1.5}} color="text.secondary">
                                 {notice.year_of_publication}
                             </Typography>
+                        <Button
+                            variant={"contained"}
+                            onClick={() => {
+                                handleCardClick(notice);
+                            }}
+                        >
+                            View
+                        </Button>
                         </CardContent>
                     </Card>
                 )) : <Typography variant={"h4"}>
