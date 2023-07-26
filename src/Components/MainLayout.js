@@ -23,6 +23,7 @@ export default function MainLayout() {
     const [reviewModalStatus, setReviewModalStatus] = React.useState(false)
     let first_name = localStorage.getItem("user_first_name").capitalize();
     let last_name = localStorage.getItem("user_last_name").capitalize();
+    let username = localStorage.getItem("username").capitalize();
 
     const location = useLocation();
 
@@ -81,7 +82,7 @@ export default function MainLayout() {
                 overflowX: "hidden",
             }}>
                 <Grid
-                    container
+                    item
                     justifyContent={"space-between"}
                     style={{
                         backgroundColor: "white",
@@ -173,7 +174,7 @@ export default function MainLayout() {
                             >
                                 <CardContent>
                                     <Typography align={"right"}>
-                                        {first_name} {last_name}
+                                        {username}
                                     </Typography>
                                 </CardContent>
                             </Card>
