@@ -19,8 +19,8 @@ export default function Dashboard() {
 
     const fetchNotices = async () => {
         try {
-            const response = await Api.get('/library/notices/'); // Fetch the 10 most recent notices from the API
-            setNotices(response.data);
+            const response = await Api.get('/library/notices/?page=1'); // Fetch the 10 most recent notices from the API
+            setNotices(response.data["results"]);
         } catch (error) {
             console.error(error);
         }

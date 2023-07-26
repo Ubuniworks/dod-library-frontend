@@ -58,6 +58,8 @@ const UploadBook = () => {
 
     // Perform form submission and data processing
     function uploadBook(event, title, year, author, file, coverImage, info, selectedTopic, selectedClassification) {
+        // print time this function is called
+
         event.preventDefault();
         // post form data to backend
         let formData = new FormData();
